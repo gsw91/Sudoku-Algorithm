@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 class TestingMainOddNumbersExterminator {
-    TestingMainOddNumbersExterminator() {
-    }
 
     public static void main(String[] args) throws Exception {
-        ArrayList<Integer> numbers = new ArrayList();
+        ArrayList <Integer> numbers = new ArrayList();
         Random generator = new Random();
 
-        for(int i = 0; i < 20; ++i) {
-            numbers.add(generator.nextInt(10));
+        for(int i = 0; i < 2000; ++i) {
+            numbers.add(generator.nextInt(100));
             System.out.println("Wygenerowana liczba " + i + " listy 1 to: " + numbers.get(i));
         }
 

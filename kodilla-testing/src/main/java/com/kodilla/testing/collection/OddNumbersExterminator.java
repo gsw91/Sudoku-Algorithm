@@ -13,14 +13,15 @@ public class OddNumbersExterminator {
 
         Integer checkTest;
         for(int n = 0; n < numbers.size(); ++n) {
-            checkTest = ((Integer)numbers.get(n)).intValue() % 2;
-            if (checkTest.equals(Integer.valueOf(0))) {
+            checkTest = (numbers.get(n)) % 2;
+            if (checkTest.equals(0)) {
                 System.out.println("Przypisanie liczby " + n + " do listy 2: " + numbers.get(n));
                 check.add(numbers.get(n));
             }
         }
 
         System.out.println("\n Wyświetlanie parzystych liczb ze zbioru " + numbers.size() + " elementów... \n");
+
         Iterator var5 = check.iterator();
 
         while(var5.hasNext()) {
@@ -28,7 +29,7 @@ public class OddNumbersExterminator {
             System.out.println(checkTest);
         }
 
-        System.out.println("\n Liczba parzystych liczb w ArrayList: " + check.size());
+        System.out.println("\n Liczba parzystych liczb w nowej ArrayList: " + check.size());
         return check.size();
     }
 }

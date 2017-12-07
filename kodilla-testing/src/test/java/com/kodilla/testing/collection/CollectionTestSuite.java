@@ -26,14 +26,18 @@ public class CollectionTestSuite {
 
     @Test
     public void testOddNumbersExterminatorEmptyList() {
+        //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
+        //When
         ArrayList<Integer> numbers = new ArrayList();
         int test = oddNumbersExterminator.exterminate(numbers).intValue();
+        //Then
         Assert.assertTrue(numbers.isEmpty());
     }
 
     @Test
     public void testOddNumbersExterminatorNormalList() {
+        //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
         ArrayList<Integer> numbers = new ArrayList();
         Random generator = new Random();
@@ -42,16 +46,15 @@ public class CollectionTestSuite {
         for(test = 0; test < 10; ++test) {
             numbers.add(generator.nextInt(10));
         }
-
+        //When
         test = oddNumbersExterminator.exterminate(numbers).intValue();
         ArrayList<Integer> check = new ArrayList();
-
+        //Then
         for(int i = 0; i < numbers.size(); ++i) {
             if (((Integer)numbers.get(i)).intValue() % 2 == 0) {
                 check.add(numbers.get(i));
             }
         }
-
         Assert.assertEquals((long)test, (long)check.size());
     }
 
