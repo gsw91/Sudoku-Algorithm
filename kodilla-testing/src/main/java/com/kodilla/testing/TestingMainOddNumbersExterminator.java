@@ -10,7 +10,7 @@ class TestingMainOddNumbersExterminator {
         ArrayList <Integer> numbers = new ArrayList();
         Random generator = new Random();
 
-        for(int i = 0; i < 2000; ++i) {
+        for(int i = 0; i < 1000; ++i) {
             numbers.add(generator.nextInt(100));
             System.out.println("Wygenerowana liczba " + i + " listy 1 to: " + numbers.get(i));
         }
@@ -18,5 +18,7 @@ class TestingMainOddNumbersExterminator {
         System.out.println("\n Szukanie liczb parzystych... \n");
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
         oddNumbersExterminator.exterminate(numbers);
+
+        System.out.println("Koniec.");
     }
 }

@@ -8,9 +8,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+//Happy Christmas
+
+
 public class CollectionTestSuite {
-    public CollectionTestSuite() {
-    }
 
     @BeforeClass
     public static void testInitialing() {
