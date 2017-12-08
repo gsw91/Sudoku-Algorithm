@@ -12,6 +12,8 @@ import org.junit.Test;
 
 public class CollectionTestSuite {
 
+    private static int testCounter = 0;
+
     @BeforeClass
     public static void testInitialing() {
         System.out.println("Wykonanie dwóch testów: \n " +
@@ -21,8 +23,8 @@ public class CollectionTestSuite {
 
     @Before
     public void testStarting() {
-
-        System.out.println("\n Rozpoczynanie testu: \n");
+        testCounter++;
+        System.out.println("\n Rozpoczynanie testu: " + testCounter + "\n");
     }
 
     @After
