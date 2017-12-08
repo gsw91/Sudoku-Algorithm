@@ -12,16 +12,15 @@ public class OddNumbersExterminator {
 
           if (numbers.size() == 0){
               System.out.println("Lista jest pusta!");
-          }
 
-          if (numbers.size() != 0) {
+          } else {
 
               for (int n = 0; n < numbers.size(); ++n) {
                   checkTest = (numbers.get(n)) % 2;
                   if (checkTest.equals(0)) {
                       System.out.println("Przypisanie parzystej liczby " + numbers.get(n) + " do nowej listy.");
                       check.add(numbers.get(n));
-                  } else if (checkTest != 0) {
+                  } else {
                       System.out.println("Pominięcie nieparzystej liczby: " + numbers.get(n));
                   }
               }
