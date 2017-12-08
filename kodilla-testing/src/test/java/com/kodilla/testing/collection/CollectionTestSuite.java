@@ -61,22 +61,22 @@ public class CollectionTestSuite {
         oddNumbersExterminator.exterminate(numbers);
         ArrayList<Integer> input = new ArrayList();
         ArrayList<Integer> output = new ArrayList();
-        output.add(10);
-        output.add(6);
-        output.add(8);
-        output.add(0);
-        output.add(1010);
+        input.add(10);
+        input.add(6);
+        input.add(8);
+        input.add(0);
+        input.add(1010);
 
         //Then
         for (int i = 0; i < numbers.size(); i++) {
             if (numbers.get(i) % 2 == 0) {
-                input.add(numbers.get(i));
+                output.add(numbers.get(i));
             }
         }
-        Assert.assertEquals((output.size()), input.size());
+        Assert.assertEquals((input.size()), output.size());
 
-        for (int n = 0; n < output.size(); n++) {
-            Assert.assertEquals(output.get(n), input.get(n));
+        for (int n = 0; n < input.size(); n++) {
+            Assert.assertEquals(input.get(n), output.get(n));
         }
     }
 }
