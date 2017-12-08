@@ -10,15 +10,13 @@ class TestingMainOddNumbersExterminator {
         ArrayList <Integer> numbers = new ArrayList();
         Random generator = new Random();
 
-        for(int i = 0; i < 1000; ++i) {
-            numbers.add(generator.nextInt(100));
+        for(int i = 0; i < 10; ++i) {
+            numbers.add(generator.nextInt(10));
             System.out.println("Wygenerowana liczba " + i + " listy 1 to: " + numbers.get(i));
         }
 
         System.out.println("\n Szukanie liczb parzystych... \n");
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
         oddNumbersExterminator.exterminate(numbers);
-
-        System.out.println("Koniec.");
     }
 }

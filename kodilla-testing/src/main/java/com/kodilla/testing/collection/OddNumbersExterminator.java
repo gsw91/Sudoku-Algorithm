@@ -5,31 +5,34 @@ import java.util.Iterator;
 
 public class OddNumbersExterminator {
 
-    public OddNumbersExterminator() {
-    }
-
-    public Integer exterminate(ArrayList<Integer> numbers) {
+      public Integer exterminate(ArrayList<Integer> numbers) {
         ArrayList<Integer> check = new ArrayList();
 
         Integer checkTest;
-        for(int n = 0; n < numbers.size(); ++n) {
-            checkTest = (numbers.get(n)) % 2;
-            if (checkTest.equals(0)) {
-                System.out.println("Przypisanie liczby " + n + " do listy 2: " + numbers.get(n));
-                check.add(numbers.get(n));
-            }
-        }
 
-        System.out.println("\n Wyświetlanie parzystych liczb ze zbioru " + numbers.size() + " elementów... \n");
+          if (numbers.size() == 0){
+              System.out.println("Lista jest pusta!");
+          }
 
-        Iterator var5 = check.iterator();
+          if (numbers.size() != 0) {
 
-        while(var5.hasNext()) {
-            checkTest = (Integer)var5.next();
-            System.out.println(checkTest);
-        }
+              for (int n = 0; n < numbers.size(); ++n) {
+                  checkTest = (numbers.get(n)) % 2;
+                  if (checkTest.equals(0)) {
+                      System.out.println("Przypisanie parzystej liczby " + numbers.get(n) + " do nowej listy.");
+                      check.add(numbers.get(n));
+                  } else if (checkTest != 0) {
+                      System.out.println("Pominięcie nieparzystej liczby: " + numbers.get(n));
+                  }
+              }
 
-        System.out.println("\n Liczba parzystych liczb w nowej ArrayList: " + check.size());
-        return check.size();
-    }
+              System.out.println("\n Wyświetlanie parzystych liczb ze zbioru " + numbers.size() + " elementów... \n");
+
+              for (int i = 0; i < check.size(); i++) {
+                  System.out.println(check.get(i));
+              }
+              System.out.println("\n Liczba parzystych liczb w nowej ArrayList: " + check.size());
+          }
+          return numbers.size();
+      }
 }
