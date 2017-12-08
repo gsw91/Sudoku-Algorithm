@@ -1,12 +1,12 @@
 package com.kodilla.testing.collection;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class OddNumbersExterminator {
 
-      public Integer exterminate(ArrayList<Integer> numbers) {
-        ArrayList<Integer> check = new ArrayList();
+    ArrayList<Integer> check = new ArrayList();
+
+    public ArrayList<Integer> exterminate(ArrayList<Integer> numbers) {
 
         Integer checkTest;
 
@@ -33,6 +33,6 @@ public class OddNumbersExterminator {
               }
               System.out.println("\n Liczba parzystych liczb w nowej ArrayList: " + check.size());
           }
-          return numbers.size();
+          return check;
       }
 }

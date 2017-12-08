@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
+
 //Happy Christmas
 /*Happy New Year*/
 
@@ -15,7 +17,7 @@ public class CollectionTestSuite {
     private static int testCounter = 0;
 
     @BeforeClass
-    public static void testInitialing() {
+    public static void testInitializing() {
         System.out.println("Wykonanie dwóch testów: \n " +
                 "Pierwszy - bada zachowanie metody przy pustej liście \n " +
                 "Drugi - bada zachowanie metody przy normalnej liście");
@@ -37,48 +39,47 @@ public class CollectionTestSuite {
         //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
         //When
-        ArrayList<Integer> numbers = new ArrayList();
-        numbers.isEmpty();
-        oddNumbersExterminator.exterminate(numbers);
+        ArrayList<Integer> input = new ArrayList();
+        input.isEmpty();
+        oddNumbersExterminator.exterminate(input);
         //Then
-        Assert.assertTrue(numbers.isEmpty());
-        Assert.assertEquals(0, numbers.size());
+        Assert.assertTrue(input.isEmpty());
+        Assert.assertEquals(0, input.size());
     }
 
     @Test
     public void testOddNumbersExterminatorNormalList() {
         //Given
         OddNumbersExterminator oddNumbersExterminator = new OddNumbersExterminator();
-        ArrayList<Integer> numbers = new ArrayList();
-        numbers.add(0, 10);
-        numbers.add(1, 3);
-        numbers.add(2, 6);
-        numbers.add(3, 1);
-        numbers.add(4, 8);
-        numbers.add(5, 0);
-        numbers.add(6, 923);
-        numbers.add(7, 1010);
+        ArrayList<Integer> input = new ArrayList<>();
+        ArrayList<Integer> expectedResult = new ArrayList<>();
+        ArrayList<Integer> actualResult  = new ArrayList<>();
+        input.add(0, 10);
+        input.add(1, 3);
+        input.add(2, 6);
+        input.add(3, 1);
+        input.add(4, 8);
+        input.add(5, 0);
+        input.add(6, 923);
+        input.add(7, 1010);
+
+        expectedResult.add(0,10);
+        expectedResult.add(1,6);
+        expectedResult.add(2,8);
+        expectedResult.add(3,0);
+        expectedResult.add(4,1010);
 
         //When
-        oddNumbersExterminator.exterminate(numbers);
-        ArrayList<Integer> input = new ArrayList();
-        ArrayList<Integer> output = new ArrayList();
-        input.add(10);
-        input.add(6);
-        input.add(8);
-        input.add(0);
-        input.add(1010);
+        actualResult = oddNumbersExterminator.exterminate(input);
 
         //Then
-        for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.get(i) % 2 == 0) {
-                output.add(numbers.get(i));
-            }
-        }
-        Assert.assertEquals((input.size()), output.size());
+        Assert.assertEquals(actualResult.size(), expectedResult.size());
 
-        for (int n = 0; n < input.size(); n++) {
-            Assert.assertEquals(input.get(n), output.get(n));
-        }
+        Assert.assertEquals(expectedResult.get(0), actualResult.get(0));
+        Assert.assertEquals(expectedResult.get(1), actualResult.get(1));
+        Assert.assertEquals(expectedResult.get(2), actualResult.get(2));
+        Assert.assertEquals(expectedResult.get(3), actualResult.get(3));
+        Assert.assertEquals(expectedResult.get(4), actualResult.get(4));
+
     }
 }
