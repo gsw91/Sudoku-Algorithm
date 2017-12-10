@@ -9,39 +9,39 @@ import org.junit.*;
 
 import java.util.ArrayList;
 
-    public class ShapeCollectorTestSuite{
+public class ShapeCollectorTestSuite{
 
-        private static int tryCounter =0;
+    private static int tryCounter =0;
 
-        @BeforeClass
-        public static void beforeAllTests() {
+    @BeforeClass
+    public static void beforeAllTests() {
             System.out.println("Tests beginning...");
-        }
+    }
 
-        @Before
-        public void beforeEachClass() {
-            tryCounter++;
-            System.out.println("Starting test number: " + tryCounter);
-        }
+    @Before
+    public void beforeEachClass() {
+        tryCounter++;
+        System.out.println("Starting test number: " + tryCounter);
+    }
 
-        @After
-        public void atEnd(){
-            System.out.println("End of test number: " + tryCounter);
-        }
+    @After
+    public void atEnd(){
+        System.out.println("End of test number: " + tryCounter);
+    }
 
-        //Test sprawdzający czy pobrana figura z klasy ShapeCollector jest taka sama jak wstawiona z klasy Square.
-        @Test
-        public void testAddSquare(){
-            //Given
-            ArrayList<Shape> test = new ArrayList<>();
-            ShapeCollector shapeCollector = new ShapeCollector (test);
-            Square square = new Square ("Square", 2.00);
-            shapeCollector.addFigure(square);
-            //When
-            Shape testFigure = test.get(0);
-            //Then
-            Assert.assertEquals(square, testFigure);
-        }
+    //Test sprawdzający czy pobrana figura z klasy ShapeCollector jest taka sama jak wstawiona z klasy Square.
+    @Test
+    public void testAddSquare(){
+        //Given
+        ArrayList<Shape> test = new ArrayList<>();
+        ShapeCollector shapeCollector = new ShapeCollector (test);
+        Square square = new Square ("Square", 2.00);
+        shapeCollector.addFigure(square);
+        //When
+        Shape testFigure = test.get(0);
+        //Then
+        Assert.assertEquals(square, testFigure);
+    }
 
     //Test sprawdzający czy pobrana figura z klasy ShapeCollector jest taka sama jak wstawiona z klasy Triangle.
     @Test
@@ -121,10 +121,10 @@ import java.util.ArrayList;
         squares.add(squareOne);
         squares.add(squareTwo);
         squares.add(squareThree);
-        String showAllSquares = shapeCollector.showFigures("Square");
+        squares.add(triangleOne);
+        ArrayList<Shape> showAllSquares = shapeCollector.showFigures();
         //Then
         Assert.assertEquals(squares, showAllSquares);
-
     }
     //Test sprawdzający czy można wyświetlić dowolny element kolekcji
     @Test
@@ -137,8 +137,8 @@ import java.util.ArrayList;
         shapeCollector.addFigure(square);
         shapeCollector.addFigure(triangle);
         //When
-        int squareOne = shapeCollector.getFigure(0);
-        int triangleOne = shapeCollector.getFigure(1);
+        Shape squareOne = shapeCollector.getFigure(0);
+        Shape triangleOne = shapeCollector.getFigure(1);
         //Then
         Assert.assertEquals(square, squareOne);
         Assert.assertEquals(triangle, triangleOne);
