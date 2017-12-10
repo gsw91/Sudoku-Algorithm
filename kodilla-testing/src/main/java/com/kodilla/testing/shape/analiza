@@ -1,0 +1,58 @@
+package com.kodilla.testing.shape;
+
+import java.util.ArrayList;
+
+public class ShapeCollector {
+
+    private ArrayList<Shape> shapes = new ArrayList<>();
+
+        public ShapeCollector(ArrayList<Shape> shapes) {
+            this.shapes = shapes;
+        }
+
+        public void addFigure(Shape shape) {
+            shapes.add(shape);
+        }
+
+        public boolean removeFigure(Shape shape) {
+            boolean result = false;
+            if (shapes.contains(shape)) {
+                shapes.remove(shape);
+                result = true;
+            }
+            return result;
+        }
+
+        public Shape getFigure(int numberOfFigure) {
+            Shape figure = shapes.get(numberOfFigure);
+            return figure;
+        }
+
+        public ArrayList<Shape> showFigures() {
+            for (int i = 0; i < shapes.size(); i++) {
+                System.out.println("The figure number: " + i +" is " + shapes.get(i));
+            }
+            return shapes;
+        }
+
+        public ArrayList<Shape> getShapes() {
+            return shapes;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof com.kodilla.testing.shape.ShapeCollector)) return false;
+
+            com.kodilla.testing.shape.ShapeCollector that = (com.kodilla.testing.shape.ShapeCollector) o;
+
+            return getShapes().equals(that.getShapes());
+        }
+
+        @Override
+        public int hashCode() {
+            return getShapes().hashCode();
+        }
+    }
+
+}
