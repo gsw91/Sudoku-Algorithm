@@ -80,6 +80,6 @@ public class CollectionTestSuite {
         Assert.assertEquals(expectedResult.get(2), actualResult.get(2));
         Assert.assertEquals(expectedResult.get(3), actualResult.get(3));
         Assert.assertEquals(expectedResult.get(4), actualResult.get(4));
-
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }
