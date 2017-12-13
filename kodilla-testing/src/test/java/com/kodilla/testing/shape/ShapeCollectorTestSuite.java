@@ -88,9 +88,9 @@ public class ShapeCollectorTestSuite{
         //Then
         Assert.assertEquals(3, quantityOfFigures);
     }
-    //Test sprawdzający czy kolekcja jest pusta po wstawieniu jednego obiektu i następnie usunięciu go
+    //Test sprawdzający czy lista jest pusta po wstawieniu jednego obiektu Square i następnie usunięciu go
     @Test
-    public void testAddRemove(){
+    public void testAddSquareRemove(){
         //Given
         ArrayList<Shape> test = new ArrayList<>();
         ShapeCollector shapeCollector = new ShapeCollector (test);
@@ -102,30 +102,58 @@ public class ShapeCollectorTestSuite{
         //Then
         Assert.assertEquals(0,isListEmpty);
     }
-    //Test sprawdzający czy można wyświetlić konkretny element kolekcji metodą showFigures
+    //Test sprawdzający czy lista jest pusta po wstawieniu jednego obiektu Triangle i następnie usunięciu go
+    @Test
+    public void testAddTriangleRemove(){
+        //Given
+        ArrayList<Shape> test = new ArrayList<>();
+        ShapeCollector shapeCollector = new ShapeCollector (test);
+        Triangle triangle = new Triangle ("Triangle", 2.50);
+        shapeCollector.addFigure(triangle);
+        shapeCollector.removeFigure(triangle);
+        //When
+        int isListEmpty = test.size();
+        //Then
+        Assert.assertEquals(0,isListEmpty);
+    }
+    //Test sprawdzający czy lista jest pusta po wstawieniu jednego obiektu Circle i następnie usunięciu go
+    @Test
+    public void testAddCircleRemove(){
+        //Given
+        ArrayList<Shape> test = new ArrayList<>();
+        ShapeCollector shapeCollector = new ShapeCollector (test);
+        Circle circle = new Circle ("Circle", 2.50);
+        shapeCollector.addFigure(circle);
+        shapeCollector.removeFigure(circle);
+        //When
+        int isListEmpty = test.size();
+        //Then
+        Assert.assertEquals(0,isListEmpty);
+    }
+    //Test sprawdzający czy można wyświetlić wszystkie elementy listy metodą showFigures
     @Test
     public void testShowFigures(){
         //Givem
         ArrayList<Shape> test = new ArrayList<>();
-        ArrayList<Shape> squares = new ArrayList<>();
         ShapeCollector shapeCollector = new ShapeCollector (test);
         Square squareOne = new Square ("Square", 2.50);
         Square squareTwo = new Square ("Square", 2.23);
         Square squareThree = new Square ("Square", 3.50);
         Triangle triangleOne = new Triangle ("Triangle", 1.98);
+        Circle circleOne = new Circle ("Circle", 2.22);
         shapeCollector.addFigure(squareOne);
         shapeCollector.addFigure(squareTwo);
         shapeCollector.addFigure(squareThree);
         shapeCollector.addFigure(triangleOne);
+        shapeCollector.addFigure(circleOne);
         //When
-        squares.add(squareOne);
-        squares.add(squareTwo);
-        squares.add(squareThree);
-        squares.add(triangleOne);
-        ArrayList<Shape> showAllSquares = shapeCollector.showFigures();
+        String showAllSquares = shapeCollector.showFigures();
+        int quantity = test.size();
         //Then
-        Assert.assertEquals(squares, showAllSquares);
-    }
+        Assert.assertSame(5 ,quantity);
+
+
+    } //metoda powinna zwrocic stringa z opisem elementow jakie posiada
     //Test sprawdzający czy można wyświetlić dowolny element kolekcji
     @Test
     public void testGetFigures(){
