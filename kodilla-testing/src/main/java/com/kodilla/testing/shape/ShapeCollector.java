@@ -11,6 +11,12 @@ public class ShapeCollector {
         this.shapes = shapes;
     }
 
+    @Override
+    public String toString() {
+        return "ShapeCollector{" +
+                "shapes=" + shapes +
+                '}';
+    }
 
     public void addFigure(Shape shape) {
         shapes.add(shape);
@@ -31,22 +37,11 @@ public class ShapeCollector {
     }
 
     public String showFigures() {
-        for (int i = 0; i<shapes.size() ; i++) {
-            figures = String.valueOf(shapes.get(i));
-            if (figures.contains("Circle")) {
-                System.out.println("The figure number: " + i + " is " + shapes.get(i).getShapeName() +
-                " ,the field of this figure is: " + shapes.get(i).getField());
-            } else {
-            if (figures.contains("Square")) {
-                System.out.println("The figure number: " + i + " is " + shapes.get(i).getShapeName() +
-                        " ,the field of this figure is: " + shapes.get(i).getField());
-            } else {
-            if (figures.contains("Triangle")) {
-                System.out.println("The figure number: " + i + " is " + shapes.get(i).getShapeName() +
-                        " ,the field of this figure is: " + shapes.get(i).getField());
-            }}}
+        String returnString = new String();
+        for (Shape figures: shapes) {
+            returnString+= figures.toString();
         }
-        return figures;
+        return returnString;
     }
 
     public ArrayList<Shape> getShapes () { return shapes; }
