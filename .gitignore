@@ -1,0 +1,5 @@
+$ cat .gitignore
+*.[oa]
+*~
+kodilla-testing/out/
+kodilla-testing/out/production/classes/com/kodilla/testing/

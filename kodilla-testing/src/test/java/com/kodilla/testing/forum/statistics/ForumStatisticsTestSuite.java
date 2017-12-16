@@ -257,7 +257,7 @@ public class ForumStatisticsTestSuite {
         showStatisticsTest.put("Comments quantity", 10.00);
         showStatisticsTest.put("Posts per user", 5.00);
         showStatisticsTest.put("Comments per user", 2.50);
-        showStatisticsTest.put("Comments per postg", 0.50);
+        showStatisticsTest.put("Comments per post", 0.50);
 
         HashMap<String, Double> mockStatisticsList = countStatistics.ShowStatistics();
         //Then
