@@ -12,13 +12,32 @@ public class CountStatistics {
         this.statistics = statistics;
     }
 
+    List<String> names;
+    int posts;
+    int comments;
+
+    public List<String> getNames() {
+        names = statistics.usersNames();
+        return names;
+    }
+
+    public int getPosts() {
+        posts = statistics.postsCount();
+        return posts;
+    }
+
+    public int getComments() {
+        comments = statistics.commentsCount();
+        return comments;
+    }
+
     public List<Double> CalculateAdvStatistics() {
         List<Double> results = new ArrayList<>();
-        double actualAveragePostQuantityPerUser = ((double) statistics.postsCount() / (double) statistics.usersNames().size());
+        double actualAveragePostQuantityPerUser = ((double) getPosts() / (double) getNames().size());
         results.add(actualAveragePostQuantityPerUser);
-        double actualAverageCommentsQuantityPerUser = (double) statistics.commentsCount() / (double) statistics.usersNames().size();
+        double actualAverageCommentsQuantityPerUser = (double) getComments() / (double) getNames().size();
         results.add(actualAverageCommentsQuantityPerUser);
-        double actualAverageCommentsInOnePost = ((double) statistics.commentsCount() / (double) statistics.postsCount());
+        double actualAverageCommentsInOnePost = ((double) getComments() / (double) getPosts());
         results.add(actualAverageCommentsInOnePost);
         return results;
     }
@@ -27,20 +46,12 @@ public class CountStatistics {
 
         HashMap<String, Double> showStatistics = new HashMap<String, Double>();
 
-        double returnUserNames = (double)statistics.usersNames().size();
-        showStatistics.put("Names quantity", returnUserNames);
-        double returnPosts = (double)statistics.postsCount();
-        showStatistics.put("Posts quantity", returnPosts);
-        double returnComments = (double)statistics.commentsCount();
-        showStatistics.put("Comments quantity", returnComments);
-        double actualAveragePostQuantityPerUser = (double)statistics.postsCount() / (double)statistics.usersNames().size();
-        showStatistics.put("Posts per user", actualAveragePostQuantityPerUser);
-        double actualAverageCommentsQuantityPerUser = (double)statistics.commentsCount() / (double)statistics.usersNames().size();
-        showStatistics.put("Comments per user", actualAverageCommentsQuantityPerUser);
-        double actualAverageCommentsInOnePost = (double)statistics.commentsCount() / (double)statistics.postsCount();
-        showStatistics.put("Comments per post", actualAverageCommentsInOnePost);
-
-        System.out.println(showStatistics);
+        showStatistics.put("Names quantity", (double)getNames().size());
+        showStatistics.put("Posts quantity", (double)getPosts());
+        showStatistics.put("Comments quantity", (double) getComments());
+        showStatistics.put("Posts per user", CalculateAdvStatistics().get(0));
+        showStatistics.put("Comments per user", CalculateAdvStatistics().get(1));
+        showStatistics.put("Comments per post", CalculateAdvStatistics().get(2));
 
         return showStatistics;
     }
