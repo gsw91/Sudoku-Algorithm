@@ -9,7 +9,6 @@ import com.kodilla.testing.forum.statistic.Statistics;
 import org.junit.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -255,16 +254,15 @@ public class ForumStatisticsTestSuite {
         when(statisticsMock.commentsCount()).thenReturn(commentsQuantity);
         CountStatistics countStatistics = new CountStatistics(statisticsMock);
         //When
-        HashMap<String, Double> showStatisticsTest = new HashMap<String, Double>();
-        showStatisticsTest.put("Names quantity", 4.00);
-        showStatisticsTest.put("Posts quantity", 20.00);
-        showStatisticsTest.put("Comments quantity", 10.00);
-        showStatisticsTest.put("Posts per user", 5.00);
-        showStatisticsTest.put("Comments per user", 2.50);
-        showStatisticsTest.put("Comments per post", 0.50);
-
-        HashMap<String, Double> mockStatisticsList = countStatistics.ShowStatistics();
+        List<Double> testUserNames = countStatistics.ShowStatistics();
+        List<Double> testResults = new ArrayList<>();
+        testResults.add(4.00);
+        testResults.add(20.00);
+        testResults.add(10.00);
+        testResults.add(5.00);
+        testResults.add(2.50);
+        testResults.add(0.50);
         //Then
-        Assert.assertEquals(showStatisticsTest, mockStatisticsList);git
+        Assert.assertEquals(testResults, testUserNames);
     }
 }

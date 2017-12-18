@@ -1,9 +1,5 @@
-<<<<<<< HEAD
+include 'kodilla-testing'
 
 include 'kodilla-testing'
 
-=======
-
-include 'kodilla-testing'
-
->>>>>>> cf5926e39de1ba5604c772c51bd60215968ca514
+include 'kodilla-stream'

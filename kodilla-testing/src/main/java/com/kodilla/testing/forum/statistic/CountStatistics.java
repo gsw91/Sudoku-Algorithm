@@ -33,26 +33,38 @@ public class CountStatistics {
 
     public List<Double> CalculateAdvStatistics() {
         List<Double> results = new ArrayList<>();
-        double actualAveragePostQuantityPerUser = ((double) getPosts() / (double) getNames().size());
+        double actualAveragePostQuantityPerUser;
+        if(getNames().size()!=0){
+            actualAveragePostQuantityPerUser = ((double) getPosts() / (double) getNames().size());
+        } else {
+            actualAveragePostQuantityPerUser = 0;
+        }
         results.add(actualAveragePostQuantityPerUser);
-        double actualAverageCommentsQuantityPerUser = (double) getComments() / (double) getNames().size();
+        double actualAverageCommentsQuantityPerUser;
+        if (getNames().size() != 0){
+            actualAverageCommentsQuantityPerUser = (double) getComments() / (double) getNames().size();
+        } else {
+            actualAverageCommentsQuantityPerUser =0;
+        }
         results.add(actualAverageCommentsQuantityPerUser);
-        double actualAverageCommentsInOnePost = ((double) getComments() / (double) getPosts());
+        double actualAverageCommentsInOnePost;
+        if (getPosts() != 0){
+            actualAverageCommentsInOnePost = ((double) getComments() / (double) getPosts());
+        } else {
+            actualAverageCommentsInOnePost = 0;
+        }
         results.add(actualAverageCommentsInOnePost);
         return results;
     }
 
-    public HashMap<String, Double> ShowStatistics() {
-
-        HashMap<String, Double> showStatistics = new HashMap<String, Double>();
-
-        showStatistics.put("Names quantity", (double)getNames().size());
-        showStatistics.put("Posts quantity", (double)getPosts());
-        showStatistics.put("Comments quantity", (double) getComments());
-        showStatistics.put("Posts per user", CalculateAdvStatistics().get(0));
-        showStatistics.put("Comments per user", CalculateAdvStatistics().get(1));
-        showStatistics.put("Comments per post", CalculateAdvStatistics().get(2));
-
-        return showStatistics;
+    public List<Double> ShowStatistics() {
+        List <Double> results = new ArrayList<>();
+        results.add((double)getNames().size());
+        results.add((double)getPosts());
+        results.add((double)getComments());
+        results.add(CalculateAdvStatistics().get(0));
+        results.add(CalculateAdvStatistics().get(1));
+        results.add(CalculateAdvStatistics().get(2));
+        return results;
     }
 }
