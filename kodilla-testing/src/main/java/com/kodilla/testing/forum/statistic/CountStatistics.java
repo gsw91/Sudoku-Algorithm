@@ -57,14 +57,26 @@ public class CountStatistics {
         return results;
     }
 
+    public double getPostsPerUser() {
+        return CalculateAdvStatistics().get(0);
+    }
+
+    public double getCommentsPerUser() {
+        return CalculateAdvStatistics().get(1);
+    }
+
+    public double getCommentsInOnePost(){
+        return CalculateAdvStatistics().get(2);
+    }
+
     public List<Double> ShowStatistics() {
         List <Double> results = new ArrayList<>();
         results.add((double)getNames().size());
         results.add((double)getPosts());
         results.add((double)getComments());
-        results.add(CalculateAdvStatistics().get(0));
-        results.add(CalculateAdvStatistics().get(1));
-        results.add(CalculateAdvStatistics().get(2));
+        results.add(getPostsPerUser());
+        results.add(getCommentsPerUser());
+        results.add(getCommentsInOnePost());
         return results;
     }
 }
