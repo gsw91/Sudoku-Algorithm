@@ -1,82 +1,86 @@
 package com.kodilla.testing.forum.statistic;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CountStatistics {
 
-    Statistics statistics;
+    private Statistics statistics;
 
     public CountStatistics(Statistics statistics) {
         this.statistics = statistics;
     }
 
-    List<String> names;
-    int posts;
-    int comments;
+    private List<String> names;
+    private int posts;
+    private int comments;
+    private double postsQuantityPerUser;
+    private double commentsQuantityPerUser;
+    private double commentsInOnePost;
 
-    public List<String> getNames() {
+    private List<String> getNames() {
         names = statistics.usersNames();
         return names;
     }
 
-    public int getPosts() {
+    private int getPosts() {
         posts = statistics.postsCount();
         return posts;
     }
 
-    public int getComments() {
+    private int getComments() {
         comments = statistics.commentsCount();
         return comments;
     }
 
-    public List<Double> CalculateAdvStatistics() {
-        List<Double> results = new ArrayList<>();
-        double actualAveragePostQuantityPerUser;
-        if(getNames().size()!=0){
-            actualAveragePostQuantityPerUser = ((double) getPosts() / (double) getNames().size());
-        } else {
-            actualAveragePostQuantityPerUser = 0;
-        }
-        results.add(actualAveragePostQuantityPerUser);
-        double actualAverageCommentsQuantityPerUser;
-        if (getNames().size() != 0){
-            actualAverageCommentsQuantityPerUser = (double) getComments() / (double) getNames().size();
-        } else {
-            actualAverageCommentsQuantityPerUser =0;
-        }
-        results.add(actualAverageCommentsQuantityPerUser);
-        double actualAverageCommentsInOnePost;
-        if (getPosts() != 0){
-            actualAverageCommentsInOnePost = ((double) getComments() / (double) getPosts());
-        } else {
-            actualAverageCommentsInOnePost = 0;
-        }
-        results.add(actualAverageCommentsInOnePost);
-        return results;
-    }
-
     public double getPostsPerUser() {
-        return CalculateAdvStatistics().get(0);
+        return postsQuantityPerUser;
     }
 
     public double getCommentsPerUser() {
-        return CalculateAdvStatistics().get(1);
+        return commentsQuantityPerUser;
     }
 
-    public double getCommentsInOnePost(){
-        return CalculateAdvStatistics().get(2);
+    public double getCommentsInOnePost() {
+        return commentsInOnePost;
     }
 
-    public List<Double> ShowStatistics() {
-        List <Double> results = new ArrayList<>();
-        results.add((double)getNames().size());
-        results.add((double)getPosts());
-        results.add((double)getComments());
-        results.add(getPostsPerUser());
-        results.add(getCommentsPerUser());
-        results.add(getCommentsInOnePost());
-        return results;
+    public void CalculateAdvStatistics() {
+
+        if(getNames().size()!=0){
+            postsQuantityPerUser = ((double) getPosts() / (double) getNames().size());
+        } else {
+            postsQuantityPerUser = 0;
+        }
+
+        if (getNames().size() != 0){
+            commentsQuantityPerUser = (double) getComments() / (double) getNames().size();
+        } else {
+            commentsQuantityPerUser =0;
+        }
+
+        if (getPosts() != 0){
+            commentsInOnePost = ((double) getComments() / (double) getPosts());
+        } else {
+            commentsInOnePost = 0;
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        CalculateAdvStatistics();
+        return "CountStatistics{" +
+                "statistics=" + statistics +
+                ", names=" + getNames() +
+                ", posts=" + getPosts() +
+                ", comments=" + getComments() +
+                ", postsQuantityPerUser=" + getPostsPerUser() +
+                ", commentsQuantityPerUser=" + getCommentsPerUser() +
+                ", commentsInOnePost=" + getCommentsInOnePost() +
+                '}';
+    }
+
+    public String ShowStatistics() {
+        return toString();
     }
 }
