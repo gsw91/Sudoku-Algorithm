@@ -1,0 +1,10 @@
+$ cat .gitignore
+*.[oa]
+*~
+kodilla-testing/out/
+kodilla-testing/out/production/classes/com/kodilla/testing/
+/out/
+out/
+/build/
+build/
+kodilla-stream/out
