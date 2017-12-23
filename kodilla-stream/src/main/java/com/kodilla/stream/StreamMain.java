@@ -15,7 +15,10 @@ public class StreamMain {
                 .filter(forumUser -> forumUser.getPostsPublished() > 0)
                 .collect(Collectors.toMap(ForumUser::getUserID, forumUser -> forumUser ));
 
-        System.out.println(theForum);
+        System.out.println("# elements: " + theForum.size());
+        theForum.entrySet().stream()
+                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .forEach(System.out::println);
     }
 }
 
