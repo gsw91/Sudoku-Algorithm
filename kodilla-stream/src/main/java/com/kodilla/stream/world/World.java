@@ -33,7 +33,7 @@ public final class World {
     }
 
     @Override
-    public String toString() {gi
+    public String toString(){
         return "World{" +
                 "continentsList=" + continentsList +
                 '}';
