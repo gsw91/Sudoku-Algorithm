@@ -1,5 +1,6 @@
-package array;
+package com.kodilla.stream.array;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class ArrayOperationsTestSuite {
@@ -28,9 +29,10 @@ public class ArrayOperationsTestSuite {
         marks[17]=4;
         marks[18]=6;
         marks[19]=2;
+        Average average = new Average(new Marks(marks));
         //When
-
+        double averageCount = average.getAverage(marks);
         //Then
-
+        Assert.assertEquals(3.6, averageCount,0);
     }
 }
