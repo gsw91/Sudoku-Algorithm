@@ -14,7 +14,6 @@ public class FirstChallenge {
                 return c;
             } catch (ArithmeticException e) {
                 System.out.println("Error: " + e);
-                throw new ArithmeticException();
             } finally {
                 System.out.println("Keep going! Never give up!");
             }
