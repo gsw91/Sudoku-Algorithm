@@ -3,7 +3,7 @@ package com.kodilla.exception.test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FlightException {
+public class FlightFinder {
     public void findFlight (Flight flight) throws RouteNotFoundException {
         Map<String, Boolean> destinationFromBalice = new HashMap<>();
         destinationFromBalice.put("Berlin Airport", true);
@@ -21,8 +21,8 @@ public class FlightException {
     }
 
     public static void main (String[] args){
-        FlightException flightException = new FlightException();
-        Flight flight = new Flight("Balice Airport","Balicegit  Airport");
+        FlightFinder flightException = new FlightFinder();
+        Flight flight = new Flight("Balice Airport","Chopin  Airport");
 
         try{
             flightException.findFlight(flight);
@@ -33,3 +33,20 @@ public class FlightException {
         }
     }
 }
+    //public void findFlight (Flight flight) throws RouteNotFoundException {
+      //  FlightData flightData = new FlightData();
+        //Map<String, Boolean> airports = flightData.Airports();
+
+//        if (airports.containsKey(flight.getArrivalAirport())){
+  //          if(airports.getOrDefault(flight.getArrivalAirport(), true)) {
+    //            System.out.println(flight.toString());
+      //      } else {
+        //        System.out.println("Brak lotu do: " + flight.getArrivalAirport());
+          //  }
+//        } else {
+  //          throw new RouteNotFoundException();
+    //    }
+      //  FlightFinder flightFinder = new FlightFinder();
+        //Flight flight1 = new Flight("Balice Airport","Berlin  Airport");
+    //}
+//}
