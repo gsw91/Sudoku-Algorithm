@@ -1,4 +1,4 @@
-package com.kodilla.exception.test;
+package com.kodilla.exception.test.ex8_3;
 
 public class ExceptionHandling extends Exception {
     public static void main (String[] args){
