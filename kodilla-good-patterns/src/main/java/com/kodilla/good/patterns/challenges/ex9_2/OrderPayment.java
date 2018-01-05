@@ -7,38 +7,31 @@ public class OrderPayment implements Payment {
     @Override
     public double calculatePayment(OrderRequest orderRequest) {
 
-        double calculationBooks = 0;
-        double calculationGames = 0;
-        double calculationPhones = 0;
-
         Store store = new Store();
 
         List<Book> books = store.booksInStore();
         List<Game> games = store.gamesInStore();
         List<Phone> phones = store.phonesInStore();
 
-        for (int i = 0; i < books.size(); i++) {
-            if (orderRequest.getNewOrder().contains(books.get(i))) {
-                calculationBooks = calculationBooks + books.get(i).getPrice();
-            }
-        }
+        double b = books.stream()
+                .filter(t -> orderRequest.getNewOrder().contains(t))
+                .mapToDouble(i -> i.getPrice())
+                .sum();
 
-        for (int t = 0; t < games.size(); t++) {
-            if (orderRequest.getNewOrder().contains(games.get(t))) {
-                calculationGames = calculationGames + games.get(t).getPrice();
-            }
-        }
+        double g = games.stream()
+                .filter(t -> orderRequest.getNewOrder().contains(t))
+                .mapToDouble(i -> i.getPrice())
+                .sum();
 
-        for (int z = 0; z < phones.size(); z++) {
-            if (orderRequest.getNewOrder().contains(phones.get(z))) {
-                calculationPhones = calculationPhones + phones.get(z).getPrice();
-            }
-        }
+        double p = phones.stream()
+                .filter(t -> orderRequest.getNewOrder().contains(t))
+                .mapToDouble(i -> i.getPrice())
+                .sum();
 
-        double calculatedAmount = calculationBooks + calculationGames + calculationPhones;
+        double sum = b + g + p;
 
-        System.out.println("To pay: " + calculatedAmount);
+        System.out.println("To pay: " + sum);
 
-        return calculatedAmount;
+        return sum;
     }
 }
