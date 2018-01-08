@@ -9,4 +9,10 @@ out/
 build/
 kodilla-stream/out
 *.iml
-kodilla-exeption/
+/kodilla-exception/
+/kodilla-exception/out/
+/kodilla-stream/
+/kodilla-stream/out/
+/kodilla-good-patterns/src/main/java/com/kodilla/good/patterns/solid/
+.idea/
+.gradle/
