@@ -1,6 +1,7 @@
 package com.kodilla.rps.GameSystem;
 
 
+import com.kodilla.rps.Exceptions.RpsException;
 import com.kodilla.rps.GameProcess;
 
 import java.util.Scanner;
@@ -24,9 +25,12 @@ public class GameInformation {
                 "press 2 to throw Paper \n" +
                 "press 3 to throw Scissors \n" +
                 "press x to end the game \n" +
-                "press n to restart the game \n" +
-                "\n Please insert quantity of winning rounds: ");
+                "press n to restart the game \n");
 
+    }
+
+    public void infoInsertQuantityOfROunds() {
+        System.out.println("\n Please insert quantity of winning rounds: ");
     }
 
 
@@ -57,36 +61,44 @@ public class GameInformation {
 
     public void exitOrReset(String command) throws NumberFormatException {
 
+        ConfirmationExitOrReset confirmationExitOrReset = new ConfirmationExitOrReset();
         Scanner scanner = new Scanner(System.in);
-        String confirm;
+
 
         if (command.equals("x")) {
             System.out.println("Do you really want to exit the game ? \n Insert y to exit, or any other key to return to the game.");
-            confirm = scanner.nextLine();
 
-            if (confirm.equals("y")) {
-                System.out.println("Goodbye!");
-                System.exit(0);
+            try {
 
-            } else {
-                throw new NumberFormatException();
+                confirmationExitOrReset.confirmExit(scanner.nextLine());
+
+            } catch (NumberFormatException o) {
+
+                System.out.println("Insert correct key!");
+
             }
 
         } else if (command.equals("n")) {
             System.out.println("Do you want to play one more time ? \n Insert y to begin, or any other key to return to the game.");
-            confirm = scanner.nextLine();
 
-            if (confirm.equals("y")) {
-                System.out.println("Resetting the game... \n");
-                GameProcess gameProcess = new GameProcess();
-                gameProcess.play();
+            try {
 
-            } else {
+                confirmationExitOrReset.confirmReset(scanner.nextLine());
+
+            } catch (NumberFormatException x) {
+
+                System.out.println("Insert correct key!");
+
+
+            }
+
+
+        } else {
+
                 throw new NumberFormatException();
+
             }
         }
-
-    }
 
 
     public void checkScore(int humanPlayerScore, int limitOfTheGame) {

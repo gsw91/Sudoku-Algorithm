@@ -7,7 +7,6 @@ import com.kodilla.rps.Players.*;
 
 public class GameProcess {
 
-
     public void play() {
 
         GameInformation gameInformation = new GameInformation();
@@ -23,40 +22,22 @@ public class GameProcess {
 
         gameInformation.showRules();
 
-        RoundsLimit roundLimit = new RoundsLimit();
-        int limitOfTheGame = roundLimit.getLimit();
+        gameInformation.infoInsertQuantityOfROunds();
 
-        boolean end = false;
+        RoundsLimit roundLimit = new RoundsLimit();
+
+        int limitOfTheGame = roundLimit.getLimit();
         int humanPlayerScore = 0;
         int computerScore = 0;
 
-        while (!end) {
-
-            if (humanPlayerScore == limitOfTheGame || computerScore == limitOfTheGame) {
-
-                boolean shouldWeEndingGame = false;
-
-                while (!shouldWeEndingGame) {
-
-                    EndOfGame endOfGame = new EndOfGame();
-                    endOfGame.endingGame();
-                    shouldWeEndingGame = true;
-                    end = true;
-
-                }
-
-                gameInformation.checkScore(humanPlayerScore, limitOfTheGame);
-
-            } else {
-
-                GameProcedure gameProcedure = new GameProcedure();
-                gameProcedure.runProcedure(humanPlayerProcess, computerPlayerProcess, humanPlayerScore, computerScore);
-
-            }
-
-        }
+        GameProcedure gameProcedure = new GameProcedure();
+        gameProcedure.runProcedure(humanPlayerProcess, computerPlayerProcess, humanPlayerScore, computerScore, limitOfTheGame);
 
     }
 
 
 }
+
+
+
+
