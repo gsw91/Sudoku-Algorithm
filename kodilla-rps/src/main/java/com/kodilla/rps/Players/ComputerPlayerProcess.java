@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public final class ComputerPlayer {
+public final class ComputerPlayerProcess {
 
     public String showFigure() {
 

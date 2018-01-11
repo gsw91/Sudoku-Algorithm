@@ -3,19 +3,18 @@ package com.kodilla.rps.Players;
 
 import com.kodilla.rps.Figures.Figure;
 import com.kodilla.rps.Figures.FiguresList;
-import com.kodilla.rps.GameRules;
 import com.kodilla.rps.GameSystem.GameInformation;
-import com.kodilla.rps.RpsException;
+import com.kodilla.rps.Exceptions.RpsException;
 
 import java.util.List;
 import java.util.Scanner;
 
 
-public final class HumanPlayer {
+public final class HumanPlayerProcess {
 
     private String playerName;
 
-    public HumanPlayer(String playerName) {
+    public HumanPlayerProcess(String playerName) {
         this.playerName = playerName;
     }
 
@@ -35,27 +34,18 @@ public final class HumanPlayer {
 
         String command = scanner.nextLine();
 
-        if(command.equals("x")) {
-            System.out.println("Do you really want to exit ? \nInsert y to exit, or any other key to return to the game. \n");
-            String confirm = scanner.nextLine();
-            if(confirm.equals("y")) {
-                System.out.println("Goodbye!");
-                System.exit(0);
-            } else {
-                throw new RpsException();
-            }
+        if(command.equals("x")||command.equals("n")) {
 
-        } else if (command.equals("n")) {
-            System.out.println("Do you want to finish current game ? \n Insert y to restart, or any other key to return to the game.");
-            String confirm = scanner.nextLine();
-            if(confirm.equals("y")) {
-                System.out.println("Resetting the game... \n");
-                GameRules gameRules = new GameRules();
-                gameRules.play();
-            } else {
-                throw new RpsException();
-            }
+            try {
 
+                gameInformation.exitOrReset(command);
+
+            } catch (NumberFormatException e){
+
+                System.out.println("Coming back to the game...");
+                showFigure();
+
+            }
 
         } else if (command.equals("1")||command.equals("2")||command.equals("3")) {
 

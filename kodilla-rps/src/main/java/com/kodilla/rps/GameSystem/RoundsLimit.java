@@ -1,6 +1,8 @@
 package com.kodilla.rps.GameSystem;
 
+
 public class RoundsLimit {
+
 
     public int getLimit(){
 
@@ -13,7 +15,6 @@ public class RoundsLimit {
         while (!roundLimitBoolean) {
 
             try {
-
                 roundLimit = roundLimit + gameInformation.insertRoundsQuantity();
 
                 if (roundLimit>0) {
@@ -21,9 +22,7 @@ public class RoundsLimit {
                 }
 
             } catch (NumberFormatException e) {
-
-                System.out.print("\n Incorrect sing, please insert a figure: \n");
-
+                System.out.print("\n Firstly please determine quantity of rounds, \n please insert a figure: \n");
 
             }
 

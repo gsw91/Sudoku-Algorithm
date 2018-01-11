@@ -1,10 +1,10 @@
 package com.kodilla.rps.GameSystem;
 
 
-import com.kodilla.rps.GameRules;
-import com.kodilla.rps.RpsException;
+import com.kodilla.rps.GameProcess;
 
 import java.util.Scanner;
+
 
 public class GameInformation {
 
@@ -32,7 +32,6 @@ public class GameInformation {
 
     public int insertRoundsQuantity() throws NumberFormatException {
 
-
         Scanner scanner = new Scanner(System.in);
         String getLimit = scanner.nextLine();
 
@@ -56,38 +55,52 @@ public class GameInformation {
     }
 
 
-    public void endingGame() throws RpsException {
-
-        System.out.println("\n Game is finished. Put n to play one more time, or x to exit");
+    public void exitOrReset(String command) throws NumberFormatException {
 
         Scanner scanner = new Scanner(System.in);
-
-        String command = scanner.nextLine();
+        String confirm;
 
         if (command.equals("x")) {
-            System.out.println("Do you really want to exit the game ? \n Insert y to exit.");
-            String confirm = scanner.nextLine();
+            System.out.println("Do you really want to exit the game ? \n Insert y to exit, or any other key to return to the game.");
+            confirm = scanner.nextLine();
 
             if (confirm.equals("y")) {
                 System.out.println("Goodbye!");
                 System.exit(0);
+
             } else {
-                throw new RpsException();
+                throw new NumberFormatException();
             }
 
         } else if (command.equals("n")) {
             System.out.println("Do you want to play one more time ? \n Insert y to begin, or any other key to return to the game.");
-            String confirm = scanner.nextLine();
+            confirm = scanner.nextLine();
+
             if (confirm.equals("y")) {
                 System.out.println("Resetting the game... \n");
-                GameRules gameRules = new GameRules();
-                gameRules.play();
-            } else {
-                throw new RpsException();
+                GameProcess gameProcess = new GameProcess();
+                gameProcess.play();
 
+            } else {
+                throw new NumberFormatException();
             }
         }
+
     }
+
+
+    public void checkScore(int humanPlayerScore, int limitOfTheGame) {
+
+        if (humanPlayerScore == limitOfTheGame) {
+            System.out.println("\nYou win the game!!!\n");
+
+        } else {
+            System.out.println("\nYou lost with a computer...\n");
+        }
+
+    }
+
+
 }
 
 
