@@ -1,6 +1,7 @@
 package com.kodilla.rps;
 
 
+import com.kodilla.rps.Figures.Figure;
 import com.kodilla.rps.GameSystem.*;
 import com.kodilla.rps.Players.*;
 
@@ -18,20 +19,17 @@ public class GameProcess {
         HumanPlayerProcess humanPlayerProcess = new HumanPlayerProcess(playerName);
         System.out.print("Hello " + humanPlayerProcess.getPlayerName());
 
-        ComputerPlayerProcess computerPlayerProcess = new ComputerPlayerProcess();
-
         gameInformation.showRules();
 
         gameInformation.infoInsertQuantityOfROunds();
 
         RoundsLimit roundLimit = new RoundsLimit();
+        int gameLimit = roundLimit.getLimit();
 
-        int limitOfTheGame = roundLimit.getLimit();
-        int humanPlayerScore = 0;
-        int computerScore = 0;
+        ComputerPlayerProcess computerPlayerProcess = new ComputerPlayerProcess();
 
-        GameProcedure gameProcedure = new GameProcedure();
-        gameProcedure.runProcedure(humanPlayerProcess, computerPlayerProcess, humanPlayerScore, computerScore, limitOfTheGame);
+        Figure figure = new Figure(null);
+        figure.compareScore(humanPlayerProcess, computerPlayerProcess, gameLimit,0,0);
 
     }
 
