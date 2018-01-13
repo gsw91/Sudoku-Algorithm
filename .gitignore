@@ -16,3 +16,8 @@ kodilla-stream/out
 /kodilla-good-patterns/src/main/java/com/kodilla/good/patterns/solid/
 .idea/
 .gradle/
+kodilla-spring-intro/
+/kodilla-spring-intro/
+/kodilla-spring/src/main/java/com/kodilla/spring/shape/
+/kodilla-spring/.gradle/
+/kodilla-spring/out/
