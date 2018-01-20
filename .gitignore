@@ -24,3 +24,5 @@ kodilla-spring-intro/
 /kodilla-spring/src/main/java/com/kodilla/spring/library/
 /kodilla-spring/src/test/java/com/kodilla/spring/library/
 /kodilla-spring/src/test/java/com/kodilla/spring/SpringRunnerTestsSuite.java
+/kodilla-spring/src/main/java/com/kodilla/spring/reader/
+/kodilla-spring/src/test/java/com/kodilla/spring/reader/
