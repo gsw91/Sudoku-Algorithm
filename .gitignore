@@ -26,3 +26,10 @@ kodilla-spring-intro/
 /kodilla-spring/src/test/java/com/kodilla/spring/SpringRunnerTestsSuite.java
 /kodilla-spring/src/main/java/com/kodilla/spring/reader/
 /kodilla-spring/src/test/java/com/kodilla/spring/reader/
+/kodilla-patterns/src/main/java/com/kodilla/patterns/singleton/SettingsFileEngine.java
+/kodilla-patterns/src/test/java/com/kodilla/patterns/singleton/SettingsFileEngineTestSuite.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/prototype/Board.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/prototype/Prototype.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/prototype/Task.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/prototype/TasksList.java
+kodilla-patterns/src/test/java/com/kodilla/patterns/prototype/BoardTestSuite.java

@@ -1,6 +1,6 @@
 package com.kodilla.patterns.singleton;
 
-public class Logger {
+public final class Logger {
     private static Logger loggerInstance = null;
     private String lastLog = "";
 
