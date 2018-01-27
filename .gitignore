@@ -40,3 +40,10 @@ kodilla-spring-intro/
 /kodilla-patterns/src/main/java/com/kodilla/patterns/strategy/IndividualCustomer.java
 /kodilla-patterns/src/main/java/com/kodilla/patterns/strategy/IndividualYoungCustomer.java
 /kodilla-patterns/src/test/java/com/kodilla/patterns/strategy/CustomerTestSuite.java
+/kodilla-patterns/src/test/java/com/kodilla/patterns/factory/ShapeFactoryTestSuite.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/factory/Circle.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/factory/Rectangle.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/factory/Shape.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/factory/ShapeFactory.java
+kodilla-patterns/src/main/java/com/kodilla/patterns/factory/Square.java
+bash.exe.stackdump
