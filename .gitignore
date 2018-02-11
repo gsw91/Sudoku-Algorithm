@@ -47,3 +47,7 @@ kodilla-patterns/src/main/java/com/kodilla/patterns/factory/Shape.java
 kodilla-patterns/src/main/java/com/kodilla/patterns/factory/ShapeFactory.java
 kodilla-patterns/src/main/java/com/kodilla/patterns/factory/Square.java
 bash.exe.stackdump
+kodilla-patterns/src/main/java/com/kodilla/patterns/builder/checkers/
+kodilla-patterns/src/main/java/com/kodilla/patterns/builder/pizza/
+kodilla-patterns/src/test/java/com/kodilla/patterns/builder/checkers/
+kodilla-patterns/src/test/java/com/kodilla/patterns/builder/pizza/
