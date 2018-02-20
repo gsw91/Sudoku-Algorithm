@@ -53,3 +53,5 @@ kodilla-patterns/src/test/java/com/kodilla/patterns/builder/checkers/
 kodilla-patterns/src/test/java/com/kodilla/patterns/builder/pizza/
 kodilla-hibernate/src/main/java/com/kodilla/hibernate/task/
 kodilla-hibernate/src/test/java/com/kodilla/hibernate/task/
+kodilla-hibernate/src/main/java/com/kodilla/hibernate/manytomany/
+kodilla-hibernate/src/test/java/com/kodilla/hibernate/manytomany/
