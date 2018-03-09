@@ -2,6 +2,7 @@ package com.kodilla.sudoku.SetupGame;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
+import com.kodilla.sudoku.CheckingAlgorithms.CheckingSections;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,113 +14,23 @@ public class GameConfiguration {
     private Scanner scanner = new Scanner(System.in);
 
     public void checkPossibleFigures(SudokuBoard sudokuBoard) {
-        CheckSection checkSection;
+        CheckingSections checkingSections = new CheckingSections(sudokuBoard);
         ValuesInsertionCondition valuesInsertionCondition;
         SudokuElement sudokuElement;
         List<Integer> possibleValues;
-        List<Integer> valueToInsert;
-        for (int i = 1; i <= 9; i++) {
-            for (int n = 1; n <= 9; n++) {
-                if (sudokuBoard.getSudokuRow(i).get(n).getValue() == -1) {
+        for (int row = 1; row <= 9; row++) {
+            for (int column = 1; column <= 9; column++) {
+                if (sudokuBoard.getSudokuRow(row).get(column).getValue() == -1) {
                     sudokuElement = new SudokuElement();
                     possibleValues = sudokuElement.getPossibleValues();
                     for (int value = 1; value <= 9; value++) {
-                        for (int k = 1; k <= 9; k++) {
-                            if (possibleValues.get(value) == sudokuBoard.getSudokuRow(i).get(k).getValue()) {
+                        for (int i = 1; i <= 9; i++) {
+                            if (possibleValues.get(value) == sudokuBoard.getSudokuRow(row).get(i).getValue()) {
                                 possibleValues.set(value, -1);
-                            } else if (possibleValues.get(value) == sudokuBoard.getSudokuRow(k).get(n).getValue()) {
+                            } else if (possibleValues.get(value) == sudokuBoard.getSudokuRow(i).get(column).getValue()) {
                                 possibleValues.set(value, -1);
                             }
-                            if (i<4 && k<4 && n<4) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionOne(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i<4 && k>=4 && k<7 && n>=4 && n<7) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionTwo(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i<4 && k>=7 && n>=7) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionThree(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i>=4 && i<=6 && k<4 && n<4) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionFour(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i>=4 && i<=6 && k>=4 && k<=6 && n>=4 && n<=6) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionFive(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i>=4 && i<=6 && k>=7 && n>=7) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionSix(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i>=7 && k<=3 && n<=3) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionSeven(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i>=7 && k>=4 && k<=6 && n>=4 && n<=6) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionEight(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
-                            if (i>=7 && k>=7 && n>=7) {
-                                checkSection = new CheckSection(sudokuBoard);
-                                List<Integer> selectedValues = checkSection.checkSectionNine(possibleValues);
-                                for (int val = 0; val < 10; val++) {
-                                    if (selectedValues.get(val) != possibleValues.get(val)) {
-                                        possibleValues.set(value, -1);
-                                    }
-                                }
-                            }
-
+                            checkingSections.checkAllSections(sudokuBoard, possibleValues,value, row, column, i);
                         }
                     }
                     List<Integer> possibilities = new ArrayList<>();
@@ -129,13 +40,13 @@ public class GameConfiguration {
                         }
                     }
 
-                    System.out.println("Possible values " + possibilities.size() + " for row: " + i + ", column: " + n + ", " + possibilities);
-                    valuesInsertionCondition = new ValuesInsertionCondition(possibilities, sudokuBoard, i, n);
+                    System.out.println("Possible values " + possibilities.size() + " for row: " + row + ", column: " + column + ", " + possibilities);
+                    valuesInsertionCondition = new ValuesInsertionCondition(possibilities, sudokuBoard, row, column);
                     valuesInsertionCondition.tryInsertValue();
 
 
-                } else if (sudokuBoard.getSudokuRow(i).get(n).getValue() != -1) {
-                    System.out.println("Row: " + i + ", column: " + n + ", inserted");
+                } else if (sudokuBoard.getSudokuRow(row).get(column).getValue() != -1) {
+                    System.out.println("Row: " + row + ", column: " + column + ", inserted");
                 }
             }
         }
@@ -157,7 +68,6 @@ public class GameConfiguration {
             }
             System.out.println(sudokuBoard);
         }
-
         return sudokuBoard;
     }
 

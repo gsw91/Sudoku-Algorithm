@@ -1,6 +1,7 @@
 package com.kodilla.sudoku.Board;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SudokuBoard {
 
@@ -8,6 +9,7 @@ public class SudokuBoard {
     public final static int MAX_INDEX = 9;
     private ArrayList<SudokuRow> sudokuRows;
     private SudokuRow sudokuRow;
+    private List<Integer> possibleValues;
 
     public SudokuBoard() {
     }

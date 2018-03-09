@@ -3,7 +3,7 @@ package com.kodilla.sudoku;
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
 import com.kodilla.sudoku.Board.SudokuRow;
-import com.kodilla.sudoku.SetupGame.CheckSection;
+import com.kodilla.sudoku.CheckingAlgorithms.CheckingSections;
 import com.kodilla.sudoku.SetupGame.GameConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +12,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuGameTestSuite {
+
+
+    @Test
+    public void testValueInsertionIntoColumn() {
+        //given
+        System.out.println("Test: Insert missing value into column one");
+        GameConfiguration gameConfiguration = new GameConfiguration();
+        SudokuBoard sudokuBoard = gameConfiguration.createBoard();
+        SudokuElement sudokuElement = new SudokuElement();
+        //when
+        sudokuBoard.getSudokuRow(1).get(1).setValue(1);
+        sudokuBoard.getSudokuRow(2).get(1).setValue(2);
+        sudokuBoard.getSudokuRow(3).get(1).setValue(3);
+        sudokuBoard.getSudokuRow(4).get(1).setValue(4);
+        sudokuBoard.getSudokuRow(5).get(1).setValue(5);
+        sudokuBoard.getSudokuRow(6).get(1).setValue(6);
+        sudokuBoard.getSudokuRow(7).get(1).setValue(7);
+        sudokuBoard.getSudokuRow(8).get(4).setValue(9);
+        System.out.println("Begining board: \n" + sudokuBoard);
+        gameConfiguration.checkPossibleFigures(sudokuBoard);
+        int expectedValue = sudokuBoard.getSudokuRow(9).get(1).getValue();
+        //then
+        System.out.println("Current board: \n" + sudokuBoard);
+        Assert.assertEquals(9, expectedValue);
+
+
+    }
+
+    @Test
+    public void testValueInsertionIntoRow() {
+        //given
+        System.out.println("Test: Insert missing value into row one");
+        GameConfiguration gameConfiguration = new GameConfiguration();
+        SudokuBoard sudokuBoard = gameConfiguration.createBoard();
+        SudokuElement sudokuElement = new SudokuElement();
+        //when
+        sudokuBoard.getSudokuRow(1).get(1).setValue(1);
+        sudokuBoard.getSudokuRow(1).get(2).setValue(2);
+        sudokuBoard.getSudokuRow(1).get(3).setValue(3);
+        sudokuBoard.getSudokuRow(1).get(4).setValue(4);
+        sudokuBoard.getSudokuRow(1).get(5).setValue(5);
+        sudokuBoard.getSudokuRow(1).get(6).setValue(6);
+        sudokuBoard.getSudokuRow(1).get(7).setValue(7);
+        sudokuBoard.getSudokuRow(4).get(8).setValue(9);
+        System.out.println("Begining board: \n" + sudokuBoard);
+        gameConfiguration.checkPossibleFigures(sudokuBoard);
+        int expectedValue = sudokuBoard.getSudokuRow(1).get(9).getValue();
+        //then
+        System.out.println("Current board: \n" + sudokuBoard);
+        Assert.assertEquals(9, expectedValue);
+    }
 
     @Test
     public void testValueInsertionIntoSectionOne() {
@@ -45,17 +96,17 @@ public class SudokuGameTestSuite {
         System.out.println("Test: Check section one");
         GameConfiguration gameConfiguration = new GameConfiguration();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
-        CheckSection checkSection;
+        CheckingSections checkingSections;
         SudokuElement sudokuElement = new SudokuElement();
         List<Integer> possibleValues = sudokuElement.getPossibleValues();
         //when
         sudokuBoard.getSudokuRow(1).get(3).setValue(6);
         sudokuBoard.getSudokuRow(2).get(1).setValue(2);
         sudokuBoard.getSudokuRow(3).get(2).setValue(5);
-        checkSection = new CheckSection(sudokuBoard);
+        checkingSections = new CheckingSections(sudokuBoard);
         //then
         System.out.println("Board: \n" + sudokuBoard);
-        List<Integer> verifiedList = checkSection.checkSectionOne(possibleValues);
+        List<Integer> verifiedList = checkingSections.checkSectionOne(possibleValues);
         List<Integer> showPossibile = new ArrayList<>();
         for (int d = 0; d <= 9; d++) {
             if (verifiedList.get(d) > 0) {
