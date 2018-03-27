@@ -2,9 +2,9 @@ package com.kodilla.sudoku.SetupGame;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
-import com.kodilla.sudoku.CheckingAlgorithms.CheckingSections;
+import com.kodilla.sudoku.CheckingAlgorithms.CheckingSudokuFields;
+import com.kodilla.sudoku.RandomForTests.RandomBoardForTesting;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,66 +13,72 @@ public class GameConfiguration {
 
     private Scanner scanner = new Scanner(System.in);
 
-    public void checkPossibleFigures(SudokuBoard sudokuBoard) {
-        CheckingSections checkingSections = new CheckingSections(sudokuBoard);
-        ValuesInsertionCondition valuesInsertionCondition;
+    public void checkPossibleFiguresAndInsert(SudokuBoard sudokuBoard) {
+        CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
         SudokuElement sudokuElement;
         List<Integer> possibleValues;
-        for (int row = 1; row <= 9; row++) {
-            for (int column = 1; column <= 9; column++) {
-                if (sudokuBoard.getSudokuRow(row).get(column).getValue() == -1) {
+        int countInsertedValues = 1;
+        while (countInsertedValues > 0) {
+            countInsertedValues = 0;
+            for (int row = 1; row <= 9; row++) {
+                for (int column = 1; column <= 9; column++) {
                     sudokuElement = new SudokuElement();
                     possibleValues = sudokuElement.getPossibleValues();
-                    for (int value = 1; value <= 9; value++) {
-                        for (int i = 1; i <= 9; i++) {
-                            if (possibleValues.get(value) == sudokuBoard.getSudokuRow(row).get(i).getValue()) {
-                                possibleValues.set(value, -1);
-                            } else if (possibleValues.get(value) == sudokuBoard.getSudokuRow(i).get(column).getValue()) {
-                                possibleValues.set(value, -1);
-                            }
-                            checkingSections.checkAllSections(sudokuBoard, possibleValues,value, row, column, i);
-                        }
-                    }
-                    List<Integer> possibilities = new ArrayList<>();
-                    for (int d = 0; d <= 9; d++) {
-                        if (possibleValues.get(d) > 0) {
-                            possibilities.add(possibleValues.get(d));
-                        }
-                    }
-
-                    System.out.println("Possible values " + possibilities.size() + " for row: " + row + ", column: " + column + ", " + possibilities);
-                    valuesInsertionCondition = new ValuesInsertionCondition(possibilities, sudokuBoard, row, column);
-                    valuesInsertionCondition.tryInsertValue();
-
-
-                } else if (sudokuBoard.getSudokuRow(row).get(column).getValue() != -1) {
-                    System.out.println("Row: " + row + ", column: " + column + ", inserted");
+                    countInsertedValues = checkingSudokuFields.checkAllFields(sudokuBoard, row, column, possibleValues, countInsertedValues);
                 }
             }
+            System.out.println("    Inserted values: " + countInsertedValues + "\n");
         }
-        System.out.println(sudokuBoard);
+        System.out.println("Curent board: \n" + sudokuBoard);
     }
 
-    public SudokuBoard fortifyBoardWithFigures (SudokuBoard sudokuBoard) {
 
-        System.out.println("Ile cyfr chcesz wprowadzić do tablicy ?");
-        int quantity = scanner.nextInt();
+    public void fortifyBoardWithFigures (SudokuBoard sudokuBoard) {
 
+        System.out.println("Welcome in Sudoku! \n" +
+                "First, complete the sudoku board with numbers.\n" +
+                "Command SUDOKU begins the game.\n" +
+                "Command RANDOM completes the board up to 20 figures and begins the game. \n");
+
+        int howManyElementsInsert = 81;
         int x = 0;
-        while (x < quantity) {
+
+        while (x < howManyElementsInsert) {
             try {
-                insertElement(sudokuBoard);
-                x += 1;
-            } catch (SudokuElementException e) {
-                System.out.println("Wrong value");
+                System.out.println("Press enter to insert new value, SUDOKU, or RANDOM.\n");
+                String command = scanner.nextLine();
+                if (command.equals("SUDOKU")) {
+                    break;
+                } else if (command.equals("RANDOM")) {
+                    RandomBoardForTesting randomBoardForTesting = new RandomBoardForTesting();
+                    int quantity = 20-x;
+                    randomBoardForTesting.createRandomBoard(sudokuBoard, quantity);
+                    break;
+                } else {
+                    insertElement(sudokuBoard);
+                    x++;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Incorrect value. \n" +
+                        "Try one more time.\n");
             }
-            System.out.println(sudokuBoard);
         }
-        return sudokuBoard;
+        System.out.println("Your board: ");
+        System.out.println(sudokuBoard);
+        System.out.println("Press enter to start the game");
+        scanner.nextLine();
     }
 
+    public void insertOneElement(SudokuBoard sudokuBoard) {
 
-    public SudokuBoard insertElement(SudokuBoard sudokuBoard) throws SudokuElementException {
+        try {
+            insertElement(sudokuBoard);
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong value");
+        }
+    }
+
+    private void insertElement(SudokuBoard sudokuBoard) throws NumberFormatException {
 
         List<Integer> possibleValuesList = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
@@ -80,27 +86,45 @@ public class GameConfiguration {
         }
 
         System.out.println("\n Insert column");
-        int column = scanner.nextInt();
+        String getColumn = scanner.nextLine();
+        int column;
+        if (Integer.parseInt(getColumn) > 0 && Integer.parseInt(getColumn) < 10) {
+            column = Integer.parseInt(getColumn);
+        } else {
+            throw new NumberFormatException();
+        }
+
         System.out.println("\n Insert row");
-        int row = scanner.nextInt();
+        String getRow = scanner.nextLine();
+        int row;
+        if (Integer.parseInt(getRow) > 0 && Integer.parseInt(getRow) < 10) {
+            row = Integer.parseInt(getRow);
+        } else {
+            throw new NumberFormatException();
+        }
         System.out.println("\n Insert value");
-        int value = scanner.nextInt();
+        String getValue = scanner.nextLine();
+        int value;
+        if (Integer.parseInt(getValue) > 0 && Integer.parseInt(getValue) < 10) {
+            value = Integer.parseInt(getValue);
+        } else {
+            throw new NumberFormatException();
+        }
 
         if (column > 0 && column < 10 && possibleValuesList.get(column) == column) {
             if (row > 0 && row < 10 && possibleValuesList.get(row) == row) {
                 if (value > 0 && value <= 9) {
                     sudokuBoard.getSudokuRow(row).get(column).setValue(value);
+                    System.out.println("Value added. \n");
                 } else {
-                    throw new SudokuElementException();
+                    throw new NumberFormatException();
                 }
             } else {
-                throw new SudokuElementException();
+                throw new NumberFormatException();
             }
         } else {
-            throw new SudokuElementException();
+            throw new NumberFormatException();
         }
-
-        return sudokuBoard;
     }
 
 
