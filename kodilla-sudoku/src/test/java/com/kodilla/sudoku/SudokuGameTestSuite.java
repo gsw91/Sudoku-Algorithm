@@ -3,7 +3,7 @@ package com.kodilla.sudoku;
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
 import com.kodilla.sudoku.Board.SudokuRow;
-import com.kodilla.sudoku.CheckingAlgorithms.CheckingSudokuFields;
+import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
 import com.kodilla.sudoku.RandomForTests.RandomBoardForTesting;
 import com.kodilla.sudoku.SetupGame.GameConfiguration;
 import org.junit.Assert;
@@ -13,6 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuGameTestSuite {
+
+    @Test
+    public void testRestartGameIfFinished() {
+        //given
+
+        //when
+        //then
+    }
 
     @Test
     public void testInsertRandomValues() {

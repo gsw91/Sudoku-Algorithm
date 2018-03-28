@@ -1,4 +1,4 @@
-package com.kodilla.sudoku.SetupGame;
+package com.kodilla.sudoku.SudokuAlgorithms;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;

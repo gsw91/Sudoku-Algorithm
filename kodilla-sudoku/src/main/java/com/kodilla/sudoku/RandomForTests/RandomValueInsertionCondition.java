@@ -1,7 +1,7 @@
 package com.kodilla.sudoku.RandomForTests;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
-import com.kodilla.sudoku.CheckingAlgorithms.CheckingSudokuFields;
+import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class RandomValueInsertionCondition {
                    } else if (possibleValues.get(value) == sudokuBoard.getSudokuRow(i).get(column).getValue()) {
                        possibleValues.set(value, -1);
                    }
-                   checkingSudokuFields.checkAllSections(sudokuBoard, possibleValues, value, row, column, i);
+                   checkingSudokuFields.checkSections(sudokuBoard, possibleValues, value, row, column, i);
                }
            }
        }

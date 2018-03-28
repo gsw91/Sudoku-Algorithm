@@ -2,7 +2,7 @@ package com.kodilla.sudoku.SetupGame;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
-import com.kodilla.sudoku.CheckingAlgorithms.CheckingSudokuFields;
+import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
 import com.kodilla.sudoku.RandomForTests.RandomBoardForTesting;
 
 import java.util.LinkedList;
@@ -38,7 +38,7 @@ public class GameConfiguration {
         System.out.println("Welcome in Sudoku! \n" +
                 "First, complete the sudoku board with numbers.\n" +
                 "Command SUDOKU begins the game.\n" +
-                "Command RANDOM completes the board up to 20 figures and begins the game. \n");
+                "Command RANDOM completes the board up to 30 figures and begins the game. \n");
 
         int howManyElementsInsert = 81;
         int x = 0;
@@ -51,7 +51,7 @@ public class GameConfiguration {
                     break;
                 } else if (command.equals("RANDOM")) {
                     RandomBoardForTesting randomBoardForTesting = new RandomBoardForTesting();
-                    int quantity = 20-x;
+                    int quantity = 30-x;
                     randomBoardForTesting.createRandomBoard(sudokuBoard, quantity);
                     break;
                 } else {

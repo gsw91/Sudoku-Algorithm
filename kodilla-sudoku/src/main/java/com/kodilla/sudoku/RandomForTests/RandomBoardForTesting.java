@@ -2,7 +2,7 @@ package com.kodilla.sudoku.RandomForTests;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
-import com.kodilla.sudoku.CheckingAlgorithms.CheckingSudokuFields;
+import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
 
 import java.util.List;
 
