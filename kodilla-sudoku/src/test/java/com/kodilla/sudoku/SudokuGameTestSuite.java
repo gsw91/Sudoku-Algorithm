@@ -9,7 +9,6 @@ import com.kodilla.sudoku.SetupGame.GameConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuGameTestSuite {
@@ -54,7 +53,7 @@ public class SudokuGameTestSuite {
         sudokuBoard.getSudokuRow(7).get(1).setValue(7);
         sudokuBoard.getSudokuRow(8).get(4).setValue(9);
         System.out.println("Begining board: \n" + sudokuBoard);
-        gameConfiguration.checkPossibleFiguresAndInsert(sudokuBoard);
+        gameConfiguration.insertValues(sudokuBoard);
         int expectedValue = sudokuBoard.getSudokuRow(9).get(1).getValue();
         //then
         System.out.println("Current board: \n" + sudokuBoard);
@@ -79,7 +78,7 @@ public class SudokuGameTestSuite {
         sudokuBoard.getSudokuRow(1).get(7).setValue(7);
         sudokuBoard.getSudokuRow(4).get(8).setValue(9);
         System.out.println("Begining board: \n" + sudokuBoard);
-        gameConfiguration.checkPossibleFiguresAndInsert(sudokuBoard);
+        gameConfiguration.insertValues(sudokuBoard);
         int expectedValue = sudokuBoard.getSudokuRow(1).get(9).getValue();
         //then
         System.out.println("Current board: \n" + sudokuBoard);
@@ -102,7 +101,7 @@ public class SudokuGameTestSuite {
         sudokuBoard.getSudokuRow(3).get(1).setValue(7);
         sudokuBoard.getSudokuRow(3).get(2).setValue(8);
         System.out.println("Begining board: \n" + sudokuBoard);
-        gameConfiguration.checkPossibleFiguresAndInsert(sudokuBoard);
+        gameConfiguration.insertValues(sudokuBoard);
         int expectedValue = sudokuBoard.getSudokuRow(3).get(3).getValue();
         //then
         System.out.println("Current board: \n" + sudokuBoard);
@@ -126,16 +125,10 @@ public class SudokuGameTestSuite {
         checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
         //then
         System.out.println("Board: \n" + sudokuBoard);
-        List<Integer> verifiedList = checkingSudokuFields.checkSectionOne(possibleValues);
-        List<Integer> showPossibile = new ArrayList<>();
-         for (int d = 0; d <= 9; d++) {
-            if (verifiedList.get(d) > 0) {
-                showPossibile.add(possibleValues.get(d));
-            }
-        }
         for(int row=1; row<4; row++) {
             for (int column = 1; column < 4; column++) {
-                System.out.println("Possible values for row: " + row + ", column: " + column + ", " + showPossibile);
+                checkingSudokuFields.checkSections(sudokuBoard, possibleValues, row, column);
+                checkingSudokuFields.checkPossibleValuesInField(sudokuBoard, row, column);
             }
         }
     }

@@ -13,7 +13,7 @@ public class ValuesInsertionCondition {
     private int row;
     private int column;
 
-    public ValuesInsertionCondition (List<Integer> possibleValues, SudokuBoard sudokuBoard, int row, int column) {
+    public ValuesInsertionCondition (SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) {
         this.possibleValues = possibleValues;
         this.sudokuBoard = sudokuBoard;
         this.row = row;

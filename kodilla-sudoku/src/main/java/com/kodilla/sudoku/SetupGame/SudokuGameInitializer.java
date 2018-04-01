@@ -14,23 +14,23 @@ public class SudokuGameInitializer {
 
         // Tworzenie tablicy
         GameConfiguration gameConfiguration = new GameConfiguration();
-        SudokuBoard sudokuBoard = gameConfiguration.createBoard();
 
-        // Wprowadzenie cyfr
-        gameConfiguration.fortifyBoardWithFigures(sudokuBoard);
+        // Powitanie i wprowadzenie cyfr
+        gameConfiguration.sudokuWelcome();
+        SudokuBoard sudokuBoard = gameConfiguration.fortifyBoardWithFigures();
 
-        // Zapętlone działanie aplikacji
+        // Zapętlone działanie aplikacji dopóki sudoku nie zostanie rozwiązane
         boolean gameFinished = false;
         while (!gameFinished) {
 
-            //Sprawdzanie możliwych liczb do wprowadzenia i ewentualne wprowadzenie
-            gameConfiguration.checkPossibleFiguresAndInsert(sudokuBoard);
-            //Wprowadzenie jedynej możliwej liczby do pola
-
-            //W razie problemu błąd
-
-
-
+            //Sprawdzanie możliwych liczb do wprowadzenia i wprowadzenie, ewentualnie błąd
+            boolean firstAlgorithm = false;
+            while (!firstAlgorithm) {
+                int insertedValues = gameConfiguration.insertValues(sudokuBoard);
+                if (insertedValues == 0) {
+                    firstAlgorithm = true;
+                }
+            }
 
             //Warunek zakończenia gry
             List<Integer> endingGame = new ArrayList<>();
@@ -48,17 +48,19 @@ public class SudokuGameInitializer {
 
                 if (decision.equals("R")) {
                     StartGame();
+                } else {
+                    break;
                 }
-                break;
             }
 
-            //Wprowadzanie liczb ręcznie
+            //Wprowadzanie ręcznie liczbt
             try {
                 System.out.println("Please insert new value by hand, algorithm sees no possibilities!\n");
                 gameConfiguration.insertOneElement(sudokuBoard);
             } catch (NumberFormatException e) {
                 System.out.println("Insert correct values \n");
             }
+
         }
     }
 
