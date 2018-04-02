@@ -7,7 +7,6 @@ import com.kodilla.sudoku.SetupGame.GameConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class CheckingSudokuFieldsTest {
     public void testEliminationAlgorithm() {
         //given
         ExamplesBoards examplesBoards = new ExamplesBoards();
-        SudokuBoard sudokuBoard = examplesBoards.getBoardLevelMedium();
+        SudokuBoard sudokuBoard = examplesBoards.getBoardLevelMediumOne();
         CheckingSudokuFields checkField = new CheckingSudokuFields(sudokuBoard);
         //when
         ValuesElimination valuesElimination = new ValuesElimination();

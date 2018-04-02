@@ -2,6 +2,7 @@ package com.kodilla.sudoku.SudokuAlgorithms;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
+import com.kodilla.sudoku.SetupGame.GameConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class CheckingSudokuFields {
         this.sudokuBoard = sudokuBoard;
     }
 
-    public int tryInsertValueIntoField(SudokuBoard sudokuBoard, int row, int column, int countInsertedValues) throws NullPointerException {
+    public int tryInsertValueIntoField(SudokuBoard sudokuBoard, int row, int column, int countInsertedValues, SudokuBoard lastCopyOfSudokuBoard) throws NullPointerException {
         Scanner scanner = new Scanner(System.in);
         ValuesInsertionCondition valuesInsertionCondition;
         List<Integer> possibleValues = checkPossibleValuesInField(sudokuBoard, row, column);
@@ -30,7 +31,10 @@ public class CheckingSudokuFields {
             System.out.println("There is an value mistaken in sudoku board. \n" +
                     "Press enter to come back to previous decision.");
             scanner.nextLine();
-                    //powrót do kopii sprzed ostatniej decyzji
+            sudokuBoard = lastCopyOfSudokuBoard;
+            System.out.println("Previous board: \n" + sudokuBoard);
+            GameConfiguration gameConfiguration = new GameConfiguration();
+            gameConfiguration.insertOneElement(sudokuBoard);
         }
         return countInsertedValues;
     }

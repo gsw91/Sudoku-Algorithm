@@ -21,6 +21,8 @@ public class SudokuElement {
         return value;
     }
 
+
+
     public List<Integer> getPossibleValues() {
         possibleValues.add(0, -1);
         for (int i = 1; i <=9; i++) {

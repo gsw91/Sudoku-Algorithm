@@ -49,8 +49,9 @@ public class SudokuGameInitializer {
                 if (decision.equals("R")) {
                     StartGame();
                 } else {
-                    break;
+                    gameFinished = true;
                 }
+                break;
             }
 
             //Wprowadzanie ręcznie liczbt

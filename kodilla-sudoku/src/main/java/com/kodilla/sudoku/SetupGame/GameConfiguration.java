@@ -1,12 +1,12 @@
 package com.kodilla.sudoku.SetupGame;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
-import com.kodilla.sudoku.Board.SudokuElement;
 import com.kodilla.sudoku.ExamplesBoards.ExamplesBoards;
 import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
 import com.kodilla.sudoku.RandomForTests.RandomBoardForTesting;
 import com.kodilla.sudoku.SudokuAlgorithms.ValuesElimination;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,16 +14,51 @@ import java.util.Scanner;
 public class GameConfiguration {
 
     private Scanner scanner = new Scanner(System.in);
+    private List<SudokuBoard> sudokuBoardsSaves = new ArrayList<>();
+
+    public SudokuBoard loadLastSavedCopy() throws IndexOutOfBoundsException {
+
+        if (sudokuBoardsSaves.size()>0) {
+            int index = sudokuBoardsSaves.size() - 1;
+            return sudokuBoardsSaves.get(index);
+        } else if (sudokuBoardsSaves.size()==0) {
+            System.out.println("Sudoku board is incorrect, please fill it one more time\n");
+            System.out.println("Press enter");
+            scanner.nextLine();
+            sudokuWelcome();
+            return fortifyBoardWithFigures();
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void deepCopyInGame(SudokuBoard sudokuBoard) {
+        SudokuBoard deepCopy = makeDeepCopyOfBoard(sudokuBoard);
+        sudokuBoardsSaves.add(deepCopy);
+    }
+
+    private SudokuBoard makeDeepCopyOfBoard(SudokuBoard sudokuBoard) {
+        SudokuBoard deepCopy = null;
+        try {
+            deepCopy = sudokuBoard.deepCopy();
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e.getMessage() + e);
+        }
+
+        return deepCopy;
+    }
 
     public void sudokuWelcome() {
         System.out.println("Welcome in Sudoku! \n" +
                 "Press enter to insert new value into board.\n" +
-                "Command RANDOM completes the board with 25 figures and begins the game. \n" +
-                "Command GET MEDIUM returns ready board \n" +
+                "Command RANDOM completes the board with 20 figures and begins the game. \n" +
+                "Command GET MEDIUM returns ready board level medium \n" +
+                "Command GET HARD returns ready board level hard" +
                 "Command SUDOKU begins the game.\n");
     }
 
     public int insertValues(SudokuBoard sudokuBoard) {
+        SudokuBoard deepCopyOfSudokuBoard = loadLastSavedCopy();
         CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
         ValuesElimination elimination = new ValuesElimination();
         int countInsertedValues = 1;
@@ -33,7 +68,7 @@ public class GameConfiguration {
             countInsertedValues = 0;
             for (int row = 1; row <= 9; row++) {
                 for (int column = 1; column <= 9; column++) {
-                    countInsertedValues = checkingSudokuFields.tryInsertValueIntoField(sudokuBoard, row, column, countInsertedValues);
+                    countInsertedValues = checkingSudokuFields.tryInsertValueIntoField(sudokuBoard, row, column, countInsertedValues, deepCopyOfSudokuBoard);
                     if (countInsertedValues == 0) {
                         countInsertedValues = elimination.insertValueByElimination(sudokuBoard, row, column);
                     }
@@ -53,6 +88,7 @@ public class GameConfiguration {
         int howManyElementsInsert = 81;
         int x = 0;
         SudokuBoard sudokuBoard = createBoard();
+        ExamplesBoards examplesBoards = new ExamplesBoards();
 
         while (x < howManyElementsInsert) {
             try {
@@ -63,19 +99,22 @@ public class GameConfiguration {
                         break;
                     case "RANDOM":
                         RandomBoardForTesting randomBoardForTesting = new RandomBoardForTesting();
-                        int quantity = 25;
+                        int quantity = 20;
                         randomBoardForTesting.createRandomBoard(sudokuBoard, quantity);
                         x=howManyElementsInsert;
                         break;
                     case "GET MEDIUM":
-                        ExamplesBoards examplesBoards = new ExamplesBoards();
-                        sudokuBoard = examplesBoards.getBoardLevelMedium();
+                        sudokuBoard = examplesBoards.getBoardLevelMediumOne();
+                        x=howManyElementsInsert;
+                        break;
+                    case "GET HARD":
+                        sudokuBoard = examplesBoards.getBoardLevelMediumOne();
                         x=howManyElementsInsert;
                         break;
                     default:
-                        insertElement(sudokuBoard);
-                        System.out.println("Current sudoku board: \n" + sudokuBoard);
+                        insertOneElement(sudokuBoard);
                         x++;
+                        System.out.println("\n Press enter to insert new value into board.\n");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Incorrect value. \n" +
@@ -90,12 +129,13 @@ public class GameConfiguration {
     }
 
     public void insertOneElement(SudokuBoard sudokuBoard) {
-
+        deepCopyInGame(sudokuBoard);
         try {
             insertElement(sudokuBoard);
         } catch (NumberFormatException e) {
             System.out.println("Wrong value");
         }
+        System.out.println("Current sudoku board: \n" + sudokuBoard);
     }
 
     private void insertElement(SudokuBoard sudokuBoard) throws NumberFormatException {
@@ -122,10 +162,19 @@ public class GameConfiguration {
         } else {
             throw new NumberFormatException();
         }
+
+        CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
+        List<Integer> possibilities = checkingSudokuFields.checkPossibleValuesInField(sudokuBoard, row, column);
+        System.out.println("Possible values for this field: " + checkingSudokuFields.addPossibilitiesToNewList(possibilities));
+        if(checkingSudokuFields.addPossibilitiesToNewList(possibilities).size()==0) {
+            throw new NumberFormatException();
+        }
+
+
         System.out.println("\n Insert value");
         String getValue = scanner.nextLine();
         int value;
-        if (Integer.parseInt(getValue) > 0 && Integer.parseInt(getValue) < 10) {
+        if (Integer.parseInt(getValue) > 0 && Integer.parseInt(getValue) < 10 && possibilities.indexOf(Integer.parseInt(getValue)) > 0) {
             value = Integer.parseInt(getValue);
         } else {
             throw new NumberFormatException();
