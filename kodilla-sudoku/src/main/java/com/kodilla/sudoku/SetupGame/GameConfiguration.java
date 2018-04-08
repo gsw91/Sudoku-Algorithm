@@ -37,6 +37,7 @@ public class GameConfiguration {
 
         // Tworzenie tablicy
         GameConfiguration gameConfiguration = GameConfiguration.getInstance();
+        backtrack.clear();
 
         // Powitanie i wprowadzenie cyfr, pierwsza kopia tablicy
         SudokuBoard sudokuBoard = gameConfiguration.initializingApp();
@@ -128,11 +129,10 @@ public class GameConfiguration {
                             countedMistakes++;
                             if (countedMistakes > 3) {
                                 System.out.println("Sudoku impossible to complete, create new board\n");
-                                backtrack.clear();
                                 restartGame();
-                            } else if (backtrack.size()==1) {
+                            }
+                            if (backtrack.size()==1) {
                                 System.out.println("This sudoku is impossible to complete, create new board\n");
-                                backtrack.clear();
                                 restartGame();
                             }
                             System.out.println("Press enter to come back to previous decision.\n");
