@@ -6,7 +6,7 @@ import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
 
 import java.util.List;
 
-public class RandomBoardForTesting {
+public class RandomBoard {
 
     public void createRandomBoard(SudokuBoard sudokuBoard, int quantityOfFigures) {
         insertRandomValueIntoBoard(sudokuBoard, quantityOfFigures);
@@ -19,19 +19,33 @@ public class RandomBoardForTesting {
         while (quantityOfFigures != 0) {
             SudokuElement sudokuElement = new SudokuElement();
             List<Integer> possibleValues = sudokuElement.getPossibleValues();
-            CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
-            RandomValueInsertionCondition randomValueInsertionCondition = new RandomValueInsertionCondition();
 
             int rowNumber = randomWithRange();
             int columnNumber = randomWithRange();
             int valueToInsertion = randomWithRange();
 
-            randomValueInsertionCondition.checkInsertionPossibility(sudokuBoard, rowNumber, columnNumber, possibleValues);
+            checkInsertionPossibility(sudokuBoard, rowNumber, columnNumber, possibleValues);
 
             if (sudokuBoard.getSudokuRow(rowNumber).get(columnNumber).getValue() == -1) {
                 if (possibleValues.indexOf(valueToInsertion)>=0) {
                     sudokuBoard.getSudokuRow(rowNumber).get(columnNumber).setValue(valueToInsertion);
                     quantityOfFigures--;
+                }
+            }
+        }
+    }
+
+    private void checkInsertionPossibility (SudokuBoard sudokuBoard, int row, int column, List<Integer> possibleValues){
+        CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
+        if (sudokuBoard.getSudokuRow(row).get(column).getValue() == -1) {
+            for (int value = 1; value <= 9; value++) {
+                for (int i = 1; i <= 9; i++) {
+                    if (possibleValues.get(value) == sudokuBoard.getSudokuRow(row).get(i).getValue()) {
+                        possibleValues.set(value, -1);
+                    } else if (possibleValues.get(value) == sudokuBoard.getSudokuRow(i).get(column).getValue()) {
+                        possibleValues.set(value, -1);
+                    }
+                    checkingSudokuFields.checkSections(sudokuBoard, possibleValues, row, column);
                 }
             }
         }

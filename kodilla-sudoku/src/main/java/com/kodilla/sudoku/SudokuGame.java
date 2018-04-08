@@ -1,12 +1,12 @@
 package com.kodilla.sudoku;
 
-import com.kodilla.sudoku.SetupGame.SudokuGameInitializer;
+import com.kodilla.sudoku.SetupGame.GameConfiguration;
 
 public class SudokuGame {
 
     public static void main(String[] Args) {
-        SudokuGameInitializer theGame = new SudokuGameInitializer();
-        theGame.StartGame();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
+        gameConfiguration.run();
     }
 
 }

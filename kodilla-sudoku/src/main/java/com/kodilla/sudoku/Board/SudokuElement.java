@@ -11,10 +11,18 @@ public class SudokuElement {
     private List<Integer> possibleValues = new ArrayList<>();
 
     public SudokuElement() {
+        possibleValues.add(0, EMPTY);
+        for (int i = 1; i <=9; i++) {
+            possibleValues.add(i, i);
+        }
     }
 
     public SudokuElement(int value) {
         this.value = value;
+        possibleValues.add(0, EMPTY);
+        for (int i = 1; i <=9; i++) {
+            possibleValues.add(i, i);
+        }
     }
 
     public int getValue() {
@@ -24,11 +32,6 @@ public class SudokuElement {
 
 
     public List<Integer> getPossibleValues() {
-        possibleValues.add(0, -1);
-        for (int i = 1; i <=9; i++) {
-            possibleValues.add(i, i);
-        }
-
         return possibleValues;
     }
 

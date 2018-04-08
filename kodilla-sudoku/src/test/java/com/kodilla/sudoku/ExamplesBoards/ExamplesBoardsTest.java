@@ -1,19 +1,36 @@
 package com.kodilla.sudoku.ExamplesBoards;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
+import com.kodilla.sudoku.Board.SudokuElement;
 import org.junit.Test;
 
+import java.util.List;
+
 public class ExamplesBoardsTest {
+
+    @Test
+    public void getBoardWithoutSolution() {
+        //given
+        ExamplesBoards examplesBoards = new ExamplesBoards();
+        SudokuBoard sudokuBoard = examplesBoards.getBoardWithoutSolution();
+        //when
+
+        //then
+        System.out.println(sudokuBoard);
+    }
 
     @Test
     public void getBoardLevelMediumOne() {
         //given
         ExamplesBoards examplesBoards = new ExamplesBoards();
         SudokuBoard sudokuBoard = examplesBoards.getBoardLevelMediumOne();
+        SudokuElement sudokuElement = new SudokuElement();
+        List<Integer> values = sudokuElement.getPossibleValues();
         //when
 
         //then
         System.out.println(sudokuBoard);
+        System.out.println("Possible values: " + values);
     }
 
     @Test

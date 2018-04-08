@@ -4,7 +4,7 @@ import com.kodilla.sudoku.Board.SudokuBoard;
 import com.kodilla.sudoku.Board.SudokuElement;
 import com.kodilla.sudoku.Board.SudokuRow;
 import com.kodilla.sudoku.SudokuAlgorithms.CheckingSudokuFields;
-import com.kodilla.sudoku.RandomForTests.RandomBoardForTesting;
+import com.kodilla.sudoku.RandomForTests.RandomBoard;
 import com.kodilla.sudoku.SetupGame.GameConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,23 +14,26 @@ import java.util.List;
 public class SudokuGameTestSuite {
 
     @Test
-    public void testRestartGameIfFinished() {
+    public void testBasicBoard() {
         //given
-
+        System.out.println("Test: Adding three new values into sudoku board");
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
+        SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         //when
         //then
+        System.out.println(sudokuBoard);
     }
 
     @Test
     public void testInsertRandomValues() {
         //given
         System.out.println("Test: Insert 40 random values into sudoku board");
-        GameConfiguration gameConfiguration = new GameConfiguration();
-        RandomBoardForTesting randomBoardForTesting = new RandomBoardForTesting();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
+        RandomBoard randomBoard = new RandomBoard();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
-        randomBoardForTesting.createRandomBoard(sudokuBoard, 40);
+        randomBoard.createRandomBoard(sudokuBoard, 40);
         //when
-        int allValues = randomBoardForTesting.countInsertedValues(sudokuBoard);
+        int allValues = randomBoard.countInsertedValues(sudokuBoard);
         //then
         Assert.assertEquals(40, allValues );
         System.out.println(sudokuBoard);
@@ -41,7 +44,7 @@ public class SudokuGameTestSuite {
     public void testValueInsertionIntoColumn() {
         //given
         System.out.println("Test: Insert missing values into column one");
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         //when
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
@@ -66,7 +69,7 @@ public class SudokuGameTestSuite {
     public void testValueInsertionIntoRow() {
         //given
         System.out.println("Test: Insert missing value into row one");
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         //when
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
@@ -89,7 +92,7 @@ public class SudokuGameTestSuite {
     public void testValueInsertionIntoSectionOne() {
         //given
         System.out.println("Test: Insert missing value into section one");
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         //when
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
@@ -113,7 +116,7 @@ public class SudokuGameTestSuite {
     public void testCheckSectionOne() {
         //given
         System.out.println("Test: Check section one");
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         CheckingSudokuFields checkingSudokuFields;
         SudokuElement sudokuElement = new SudokuElement();
@@ -154,7 +157,7 @@ public class SudokuGameTestSuite {
     public void testShowEmptyBoard() {
         //given
         System.out.println("Test: Creating new board");
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         //when
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         //then
@@ -183,7 +186,7 @@ public class SudokuGameTestSuite {
     public void testInsertValueIntoBoard() {
         //given
         System.out.println("Test: Adding three new values into sudoku board");
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         //when
         sudokuBoard.getSudokuRow(4).get(3).setValue(6);

@@ -1,12 +1,9 @@
 package com.kodilla.sudoku.SudokuAlgorithms;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
-import com.kodilla.sudoku.Board.SudokuElement;
-import com.kodilla.sudoku.SetupGame.GameConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CheckingSudokuFields {
 
@@ -16,40 +13,12 @@ public class CheckingSudokuFields {
         this.sudokuBoard = sudokuBoard;
     }
 
-    public int tryInsertValueIntoField(SudokuBoard sudokuBoard, int row, int column, int countInsertedValues, SudokuBoard lastCopyOfSudokuBoard) throws NullPointerException {
-        Scanner scanner = new Scanner(System.in);
-        ValuesInsertionCondition valuesInsertionCondition;
-        List<Integer> possibleValues = checkPossibleValuesInField(sudokuBoard, row, column);
-        List<Integer> checkedPossibleValues = addPossibilitiesToNewList(possibleValues);
-        if(checkedPossibleValues.size()==1) {
-            sudokuBoard.getSudokuRow(row).get(column).setValue(checkedPossibleValues.get(0));
-            valuesInsertionCondition = new ValuesInsertionCondition(sudokuBoard, checkedPossibleValues, row, column);
-            if (valuesInsertionCondition.countInsertionValues() > 0) {
-                countInsertedValues++;
-            }
-        } else if(checkedPossibleValues.size()==0 && sudokuBoard.getSudokuRow(row).get(column).getValue()==-1) {
-            System.out.println("There is an value mistaken in sudoku board. \n" +
-                    "Press enter to come back to previous decision.");
-            scanner.nextLine();
-            sudokuBoard = lastCopyOfSudokuBoard;
-            System.out.println("Previous board: \n" + sudokuBoard);
-            GameConfiguration gameConfiguration = new GameConfiguration();
-            gameConfiguration.insertOneElement(sudokuBoard);
-        }
-        return countInsertedValues;
-    }
-
-
-
     public List<Integer> checkPossibleValuesInField(SudokuBoard sudokuBoard, int row, int column) {
-        SudokuElement sudokuElement = new SudokuElement();
-        List<Integer> possibleValues = sudokuElement.getPossibleValues();
+        List<Integer> possibleValues = sudokuBoard.getSudokuRow(row).get(column).getPossibleValues();
         if(sudokuBoard.getSudokuRow(row).get(column).getValue()==-1) {
             checkColumn(sudokuBoard, possibleValues, row, column);
             checkRow(sudokuBoard, possibleValues, row, column);
             checkSections(sudokuBoard, possibleValues, row, column);
-            //List<Integer> checkedPossibleValues = addPossibilitiesToNewList(possibleValues);
-            //System.out.println("Possible values for row: " + row + ", column: " + column + ", values " + checkedPossibleValues);
         } else {
             possibleValues.clear();
             for (int i = 0; i < 10; i++) {
@@ -69,9 +38,9 @@ public class CheckingSudokuFields {
         return checkedPossibleValues;
     }
 
-    public void checkColumn(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) {
+    private void checkColumn(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) {
         if (sudokuBoard.getSudokuRow(row).get(column).getValue() == -1) {
-            for (int currentRow = 1; currentRow <= 9; currentRow++) {
+            for (int currentRow = 1; currentRow < 10; currentRow++) {
                 if (sudokuBoard.getSudokuRow(currentRow).get(column).getValue() > 0) {
                     int index = sudokuBoard.getSudokuRow(currentRow).get(column).getValue();
                     if (possibleValues.get(index) == sudokuBoard.getSudokuRow(currentRow).get(column).getValue()) {
@@ -82,9 +51,9 @@ public class CheckingSudokuFields {
         }
     }
 
-    public void checkRow(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) {
+    private void checkRow(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) {
         if (sudokuBoard.getSudokuRow(row).get(column).getValue() == -1) {
-            for (int currentColumn = 1; currentColumn <= 9; currentColumn++) {
+            for (int currentColumn = 1; currentColumn <=9; currentColumn++) {
                 if (sudokuBoard.getSudokuRow(row).get(currentColumn).getValue() > 0) {
                     int index = sudokuBoard.getSudokuRow(row).get(currentColumn).getValue();
                     if (possibleValues.get(index) == sudokuBoard.getSudokuRow(row).get(currentColumn).getValue()) {

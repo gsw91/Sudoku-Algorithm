@@ -1,7 +1,6 @@
 package com.kodilla.sudoku.SudokuAlgorithms;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
-import com.kodilla.sudoku.Board.SudokuElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ public class ValuesElimination {
     private List<Integer> checkedList = new ArrayList<>();
     private CheckingSudokuFields checkingSudokuFields;
 
-    public int insertValueByElimination(SudokuBoard sudokuBoard, int row, int column) {
+    public void insertValueByElimination(SudokuBoard sudokuBoard, int row, int column) {
 
         int score;
         checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
@@ -20,9 +19,8 @@ public class ValuesElimination {
         score = insertValueInColumnByElimination(sudokuBoard, possibleValues, row, column);
 
         if (score == 0) {
-            score = insertValueInRowByElimination(sudokuBoard, possibleValues, row, column);
+            insertValueInRowByElimination(sudokuBoard, possibleValues, row, column);
         }
-        return score;
     }
 
     private int insertValueInColumnByElimination(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) throws IndexOutOfBoundsException {
@@ -46,8 +44,6 @@ public class ValuesElimination {
                     if (list.get(i) != i && possibleValues.get(i) == i) {
                         countThisShit++;
                     }
-              //      System.out.println("Value nr " + i + " from list " + possibleValues + " " + possibleValues.get(i) +
-              //              ", from list " + list + " " + list.get(i) + ", counted " + countThisShit );
                 }
                 if (countThisShit == otherLists.size()) {
                     sudokuBoard.getSudokuRow(row).get(column).setValue(possibleValues.get(i));
@@ -56,18 +52,11 @@ public class ValuesElimination {
             }
         }
 
-        //    List<Integer> finalList = checkingSudokuFields.addPossibilitiesToNewList(possibleValues);
-        //    if (finalList.size() == 1) {
-        //        sudokuBoard.getSudokuRow(row).get(column).setValue(finalList.get(0));
-        //        score = 1;
-        //        System.out.println("Elimination process in column - Value: " + finalList.get(0) + " inserted into row: " + row + " column: " + column);
-        //    }
         return score;
     }
 
-    private int insertValueInRowByElimination(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) throws IndexOutOfBoundsException {
+    private void insertValueInRowByElimination(SudokuBoard sudokuBoard, List<Integer> possibleValues, int row, int column) throws IndexOutOfBoundsException {
 
-        int score = 0;
         otherLists = new ArrayList<>();
 
         for (int columnNumber = 1; columnNumber < 10; columnNumber++) {
@@ -86,22 +75,12 @@ public class ValuesElimination {
                     if (list.get(i) != i && possibleValues.get(i) == i) {
                         countThisShit = countThisShit + 1;
                     }
-                    //System.out.println("Value nr " + i + " from list " + possibleValues + " " + possibleValues.get(i) +
-                    //        ", from list " + list + " " + list.get(i) + ", counted " + countThisShit );
                 }
                 if (countThisShit == otherLists.size()) {
-                    sudokuBoard.getSudokuRow(row).get(column).setValue(possibleValues.get(i)); //possibleValues.set(i, -1);
-                    score = 1;
+                    sudokuBoard.getSudokuRow(row).get(column).setValue(possibleValues.get(i));
                 }
             }
         }
-
-        // List<Integer> finalList = checkingSudokuFields.addPossibilitiesToNewList(possibleValues);
-        // if (finalList.size() == 1) {
-        //    sudokuBoard.getSudokuRow(row).get(column).setValue(finalList.get(0));
-        //    score++;
-        //   System.out.println("Elimination process in row - Value: " + finalList.get(0) + " inserted into row: " + row + " column: " + column);
-        // }
-        return score;
     }
+
 }

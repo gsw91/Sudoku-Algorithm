@@ -1,7 +1,6 @@
 package com.kodilla.sudoku.SudokuAlgorithms;
 
 import com.kodilla.sudoku.Board.SudokuBoard;
-import com.kodilla.sudoku.Board.SudokuElement;
 import com.kodilla.sudoku.ExamplesBoards.ExamplesBoards;
 import com.kodilla.sudoku.SetupGame.GameConfiguration;
 import org.junit.Assert;
@@ -48,7 +47,7 @@ public class CheckingSudokuFieldsTest {
     @Test
     public void testInsertValueIntoColumnByElimination() {
         //given
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
         sudokuBoard.getSudokuRow(2).get(1).setValue(2);
@@ -58,16 +57,9 @@ public class CheckingSudokuFieldsTest {
         sudokuBoard.getSudokuRow(6).get(1).setValue(6);
         sudokuBoard.getSudokuRow(8).get(4).setValue(9);
         sudokuBoard.getSudokuRow(9).get(7).setValue(9);
-        //CheckingSudokuFields checkField = new CheckingSudokuFields(sudokuBoard);
-
-        //List<Integer> possibleValuesR7C1 = checkField.checkPossibleValuesInField(sudokuBoard, 7, 1);
-        //List<Integer> possibleValuesR8C1 = checkField.checkPossibleValuesInField(sudokuBoard,8, 1);
-        //List<Integer> possibleValuesR9C1 = checkField.checkPossibleValuesInField(sudokuBoard, 9, 1);
-
         //when
         ValuesElimination elimination = new ValuesElimination();
         elimination.insertValueByElimination(sudokuBoard, 7, 1);
-
         //then
         Assert.assertEquals(9, sudokuBoard.getSudokuRow(7).get(1).getValue());
         System.out.println(sudokuBoard);
@@ -76,7 +68,7 @@ public class CheckingSudokuFieldsTest {
     @Test
     public void testInsertValueIntoRowByElimination() {
         //given
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
         sudokuBoard.getSudokuRow(1).get(2).setValue(2);
@@ -86,11 +78,6 @@ public class CheckingSudokuFieldsTest {
         sudokuBoard.getSudokuRow(1).get(6).setValue(6);
         sudokuBoard.getSudokuRow(4).get(8).setValue(7);
         sudokuBoard.getSudokuRow(7).get(9).setValue(7);
-        CheckingSudokuFields checkField = new CheckingSudokuFields(sudokuBoard);
-
-        List<Integer> possibleValuesR1C7 = checkField.checkPossibleValuesInField(sudokuBoard, 1, 7);
-        List<Integer> possibleValuesR1C8 = checkField.checkPossibleValuesInField(sudokuBoard,1, 8);
-        List<Integer> possibleValuesR1C9 = checkField.checkPossibleValuesInField(sudokuBoard, 1, 9);
         //when
         ValuesElimination elimination = new ValuesElimination();
         elimination.insertValueByElimination(sudokuBoard, 1, 7);
@@ -103,7 +90,7 @@ public class CheckingSudokuFieldsTest {
     @Test
     public void checkSudokuElement() {
         //given
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
         sudokuBoard.getSudokuRow(2).get(1).setValue(2);
@@ -117,11 +104,8 @@ public class CheckingSudokuFieldsTest {
         sudokuBoard.getSudokuRow(1).get(5).setValue(7);
         sudokuBoard.getSudokuRow(1).get(6).setValue(6);
         sudokuBoard.getSudokuRow(1).get(7).setValue(5);
-
         CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
-        SudokuElement sudokuElement = new SudokuElement();
         List<Integer> possibleValues;
-
         //when
         possibleValues = checkingSudokuFields.checkPossibleValuesInField(sudokuBoard, 3, 3 );
         List<Integer> checkedPossibleValues = new ArrayList<>();
@@ -141,7 +125,7 @@ public class CheckingSudokuFieldsTest {
     @Test
     public void checkColumn() {
         //given
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
         sudokuBoard.getSudokuRow(2).get(1).setValue(2);
@@ -149,13 +133,9 @@ public class CheckingSudokuFieldsTest {
         sudokuBoard.getSudokuRow(4).get(1).setValue(5);
         sudokuBoard.getSudokuRow(5).get(1).setValue(6);
         sudokuBoard.getSudokuRow(7).get(1).setValue(7);
-
         CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
-        SudokuElement sudokuElement = new SudokuElement();
-        List<Integer> possibleValues = sudokuElement.getPossibleValues();
+        List<Integer> possibleValues = checkingSudokuFields.checkPossibleValuesInField(sudokuBoard, 6, 1);
         //when
-        checkingSudokuFields.checkColumn(sudokuBoard, possibleValues, 6, 1);
-
         List<Integer> checkedPossibleValues = new ArrayList<>();
         for (int d = 0; d <= 9; d++) {
             if (possibleValues.get(d) > 0) {
@@ -169,7 +149,7 @@ public class CheckingSudokuFieldsTest {
     @Test
     public void checkRows() {
         //given
-        GameConfiguration gameConfiguration = new GameConfiguration();
+        GameConfiguration gameConfiguration = GameConfiguration.getInstance();
         SudokuBoard sudokuBoard = gameConfiguration.createBoard();
         sudokuBoard.getSudokuRow(1).get(1).setValue(1);
         sudokuBoard.getSudokuRow(1).get(2).setValue(2);
@@ -178,10 +158,8 @@ public class CheckingSudokuFieldsTest {
         sudokuBoard.getSudokuRow(1).get(6).setValue(6);
         sudokuBoard.getSudokuRow(1).get(7).setValue(7);
         CheckingSudokuFields checkingSudokuFields = new CheckingSudokuFields(sudokuBoard);
-        SudokuElement sudokuElement = new SudokuElement();
-        List<Integer> possibleValues = sudokuElement.getPossibleValues();
+        List<Integer> possibleValues = checkingSudokuFields.checkPossibleValuesInField(sudokuBoard, 1, 8);
         //when
-        checkingSudokuFields.checkRow(sudokuBoard, possibleValues, 1, 8);
         List<Integer> checkedPossibleValues = new ArrayList<>();
         for (int d = 0; d <= 9; d++) {
             if (possibleValues.get(d) > 0) {
@@ -190,6 +168,6 @@ public class CheckingSudokuFieldsTest {
         }
         //then
         Assert.assertEquals(3, checkedPossibleValues.size());
-
     }
+
 }
