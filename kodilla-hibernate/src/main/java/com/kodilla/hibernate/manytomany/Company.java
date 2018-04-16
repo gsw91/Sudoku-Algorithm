@@ -5,11 +5,9 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedNativeQuery(
+@NamedQuery(
         name = "Company.retrieveCompanies",
-        query = "SELECT * FROM COMPANIES C" +
-                " WHERE INSTR(COMPANY_NAME, :companyName) >0",
-        resultClass = Company.class
+        query = "FROM Company WHERE name LIKE :companyName"
 )
 
 @Entity
