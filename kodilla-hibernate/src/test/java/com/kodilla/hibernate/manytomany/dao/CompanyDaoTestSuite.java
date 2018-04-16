@@ -104,8 +104,8 @@ public class CompanyDaoTestSuite {
         int cdProjectId = cdProject.getId();
         int bitStudioId = bitStudio.getId();
         int projectAutoId = projectAuto.getId();
-        List<Company> companies = companyDao.retrieveCompanies("PROJ");
-        List<Company> companies1 = companyDao.retrieveCompanies("bit");
+        List<Company> companies = companyDao.retrieveCompanies("%PROJ%");
+        List<Company> companies1 = companyDao.retrieveCompanies("%bit%");
         //Then
         Assert.assertEquals(2, companies.size());
         Assert.assertEquals(1,companies1.size());
