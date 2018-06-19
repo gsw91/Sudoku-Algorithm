@@ -1,0 +1,8 @@
+$ cat .gitignore
+*.[oa]
+*~
+out/
+build/
+.gradle/
+.idea/
+git add
